@@ -40,3 +40,25 @@ button:focus-visible{outline:2px solid var(--gold);outline-offset:2px}
 #skill-1,#skill-2,#skill-3{position:relative;color:#e8ce91;border-color:#806b43;background:linear-gradient(145deg,#354050,#1a2633)}
 #skill-1:hover,#skill-2:hover,#skill-3:hover{border-color:#f0d18b;box-shadow:0 0 13px #d9b76d33}
 .action-slot[title="Em breve"]{opacity:.48;cursor:not-allowed}
+
+/* Inventário e equipamento */
+.inventory-overlay{position:fixed;inset:0;z-index:20;display:none;align-items:center;justify-content:center;padding:18px;background:#050a10cc;backdrop-filter:blur(7px)}
+.inventory-overlay.visible{display:flex}
+.inventory-window{width:min(760px,100%);max-height:min(680px,90vh);overflow:auto;border:1px solid #927747;border-radius:14px;background:linear-gradient(145deg,#1b2a38,#0d151e 78%);box-shadow:0 25px 90px #000b,inset 0 1px #fff1;padding:20px}
+.inventory-window>header{display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid #354453;padding-bottom:14px}
+.inventory-window header small{font-size:8px;letter-spacing:2px;color:#d5b56e}
+.inventory-window h2{font:22px Marcellus,serif;margin:5px 0 0;color:#f0dfb5}
+.inventory-window header button{width:34px;height:34px;border:1px solid #526171;border-radius:8px;background:#1c2a38;color:#f2dfb2;font-size:22px;cursor:pointer}
+.inventory-content{display:grid;grid-template-columns:minmax(190px,.8fr) minmax(260px,1.2fr);gap:20px;padding:18px 0}
+.inventory-content h3{font-size:9px;letter-spacing:1.6px;color:#d7bd82;margin:0 0 12px}
+.inventory-content h3 small{float:right;color:#8293a1;font-size:9px;letter-spacing:0}
+.equipment-slot{display:flex;align-items:center;gap:10px;padding:11px;margin-bottom:8px;border:1px solid #344656;border-radius:8px;background:#111c27}
+.equipment-slot>span{width:36px;height:36px;display:grid;place-items:center;border-radius:7px;background:#29394a;color:#e2c27d;font-size:19px}
+.equipment-slot b,.equipment-slot small{display:block}.equipment-slot b{font-size:10px;color:#e5eaf0}.equipment-slot small{font-size:8px;color:#8798a7;margin-top:4px}
+.equipment-bonus{font-size:9px;color:#9bcaa6;padding:10px;background:#12241e;border-radius:7px}
+.bag-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}
+.bag-grid button{min-height:112px;padding:9px 5px;border:1px solid #3b4b5a;border-radius:8px;background:linear-gradient(145deg,#263646,#14202c);color:#dce5ec;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;cursor:pointer}
+.bag-grid button:hover,.bag-grid button.equipped{border-color:#d8b66d;background:linear-gradient(145deg,#51432c,#202d38)}
+.bag-grid button span{font-size:24px;color:#e4c77f}.bag-grid button b{font-size:9px;text-align:center}.bag-grid button small{font-size:8px;color:#a7b6c2}
+.inventory-window footer{border-top:1px solid #354453;padding-top:12px;font-size:9px;line-height:1.5;color:#8192a0}
+@media(max-width:560px){.inventory-content{grid-template-columns:1fr}.inventory-window{padding:14px}.bag-grid{grid-template-columns:repeat(3,minmax(0,1fr))}}
