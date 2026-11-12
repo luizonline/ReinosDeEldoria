@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#101713">
+  <title>Reinos de Eldoria</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header>
+    <b>✦ REINOS DE ELDORIA</b>
+    <span>RPG MEDIEVAL ONLINE · PROTÓTIPO 0.1</span>
+  </header>
+  <main>
+    <aside>
+      <h3>PERSONAGEM</h3>
+      <div class="avatar">⚔</div>
+      <b>Viajante</b>
+      <small>Guerreiro · Nível 1</small>
+      <p>HP <strong>100/100</strong><meter value="100" max="100"></meter></p>
+      <p>MP <strong>30/40</strong><meter value="30" max="40"></meter></p>
+      <hr>
+      <small>Clique no chão para caminhar. Explore a vila e encontre o Guardião.</small>
+      <p id="coords" aria-live="polite"></p>
+    </aside>
+    <section>
+      <div class="bar"><b>🌲 Planícies de Eldoria</b><span id="notice" aria-live="polite">Bem-vindo, viajante!</span></div>
+      <canvas id="world" width="960" height="600" aria-label="Mapa de Eldoria. Clique para mover seu personagem."></canvas>
+      <div class="bar foot">CONTROLES: CLIQUE PARA MOVER <span>Multiplayer em desenvolvimento</span></div>
+    </section>
+    <aside>
+      <h3>JORNADA</h3>
+      <p>◇ Visite o Guardião</p>
+      <p>◇ Encontre o Slime Verde</p>
+      <hr>
+      <button id="center" type="button">Centralizar personagem</button>
+      <button id="help" type="button">Como jogar</button>
+      <small>Protótipo · progresso não salvo</small>
+    </aside>
+  </main>
+  <script src="src/game.js"></script>
+</body>
+</html>
