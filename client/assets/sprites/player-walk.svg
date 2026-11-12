@@ -1,0 +1,49 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="256" height="80" viewBox="0 0 256 80">
+<defs>
+ <linearGradient id="cape" x2="0" y2="1"><stop stop-color="#527da6"/><stop offset="1" stop-color="#233d5b"/></linearGradient>
+ <linearGradient id="steel" x2="0" y2="1"><stop stop-color="#f1f4ef"/><stop offset="1" stop-color="#7d91a0"/></linearGradient>
+</defs>
+<!-- Four original walk-cycle frames, 64 x 80 each; facing down -->
+<g transform="translate(0 0)">
+ <ellipse cx="32" cy="70" rx="15" ry="5" fill="#15251d" opacity=".4"/>
+ <path d="M22 37 Q32 32 42 37 L47 61 37 65 32 55 27 65 17 61Z" fill="url(#cape)" stroke="#1d344d" stroke-width="2"/>
+ <path d="M25 36 L39 36 42 55 22 55Z" fill="#426b8d"/>
+ <path d="M24 55 L31 56 28 70 20 70Z" fill="#c4cbd0"/><path d="M34 56 L41 55 46 68 38 71Z" fill="#c4cbd0"/>
+ <path d="M19 69h10v5H17zM37 69h10v5H36z" fill="#4a3427"/>
+ <path d="M17 39L11 55 16 58 24 45M43 39L50 51 46 56 39 45" fill="#8b633e"/>
+ <circle cx="32" cy="25" r="12" fill="#e2b990" stroke="#835d42" stroke-width="1.5"/>
+ <path d="M20 25Q18 9 32 9Q46 9 44 25L40 20 24 20Z" fill="#554233"/>
+ <path d="M23 18Q32 11 41 18" fill="none" stroke="#d6bd83" stroke-width="3"/>
+ <circle cx="27" cy="27" r="1.4" fill="#29313a"/><circle cx="37" cy="27" r="1.4" fill="#29313a"/>
+ <path d="M45 38L55 19" stroke="url(#steel)" stroke-width="3" stroke-linecap="round"/><path d="M54 20l5-9" stroke="#d8c18b" stroke-width="3"/>
+</g>
+<g transform="translate(64 0)">
+ <ellipse cx="32" cy="70" rx="15" ry="5" fill="#15251d" opacity=".4"/>
+ <path d="M22 37Q32 32 42 37L47 61 37 65 32 55 27 65 17 61Z" fill="url(#cape)" stroke="#1d344d" stroke-width="2"/>
+ <path d="M25 36L39 36 42 55 22 55Z" fill="#426b8d"/>
+ <path d="M24 55L31 56 36 67 29 71Z" fill="#c4cbd0"/><path d="M34 56L41 55 42 68 34 70Z" fill="#c4cbd0"/>
+ <path d="M28 69h9v5h-9zM34 68h11v5H34z" fill="#4a3427"/>
+ <path d="M19 39L12 50 16 56 24 45M43 39L51 55 46 58 39 45" fill="#8b633e"/>
+ <circle cx="32" cy="25" r="12" fill="#e2b990" stroke="#835d42" stroke-width="1.5"/><path d="M20 25Q18 9 32 9Q46 9 44 25L40 20 24 20Z" fill="#554233"/><path d="M23 18Q32 11 41 18" fill="none" stroke="#d6bd83" stroke-width="3"/><circle cx="27" cy="27" r="1.4" fill="#29313a"/><circle cx="37" cy="27" r="1.4" fill="#29313a"/>
+ <path d="M45 38L55 19" stroke="url(#steel)" stroke-width="3" stroke-linecap="round"/><path d="M54 20l5-9" stroke="#d8c18b" stroke-width="3"/>
+</g>
+<g transform="translate(128 0)">
+ <ellipse cx="32" cy="70" rx="15" ry="5" fill="#15251d" opacity=".4"/>
+ <path d="M22 37Q32 32 42 37L47 61 37 65 32 55 27 65 17 61Z" fill="url(#cape)" stroke="#1d344d" stroke-width="2"/>
+ <path d="M25 36L39 36 42 55 22 55Z" fill="#426b8d"/>
+ <path d="M24 55L31 56 27 70 19 70Z" fill="#c4cbd0"/><path d="M34 56L41 55 47 66 40 71Z" fill="#c4cbd0"/>
+ <path d="M18 69h11v5H17zM39 69h9v5h-9z" fill="#4a3427"/>
+ <path d="M19 39L11 54 16 58 24 45M43 39L50 51 46 56 39 45" fill="#8b633e"/>
+ <circle cx="32" cy="25" r="12" fill="#e2b990" stroke="#835d42" stroke-width="1.5"/><path d="M20 25Q18 9 32 9Q46 9 44 25L40 20 24 20Z" fill="#554233"/><path d="M23 18Q32 11 41 18" fill="none" stroke="#d6bd83" stroke-width="3"/><circle cx="27" cy="27" r="1.4" fill="#29313a"/><circle cx="37" cy="27" r="1.4" fill="#29313a"/>
+ <path d="M45 38L55 19" stroke="url(#steel)" stroke-width="3" stroke-linecap="round"/><path d="M54 20l5-9" stroke="#d8c18b" stroke-width="3"/>
+</g>
+<g transform="translate(192 0)">
+ <ellipse cx="32" cy="70" rx="15" ry="5" fill="#15251d" opacity=".4"/>
+ <path d="M22 37Q32 32 42 37L47 61 37 65 32 55 27 65 17 61Z" fill="url(#cape)" stroke="#1d344d" stroke-width="2"/>
+ <path d="M25 36L39 36 42 55 22 55Z" fill="#426b8d"/>
+ <path d="M24 55L31 56 34 70 25 70Z" fill="#c4cbd0"/><path d="M34 56L41 55 37 68 31 70Z" fill="#c4cbd0"/>
+ <path d="M23 69h10v5H21zM30 69h10v5H30z" fill="#4a3427"/>
+ <path d="M19 39L12 51 16 56 24 45M43 39L50 55 46 58 39 45" fill="#8b633e"/>
+ <circle cx="32" cy="25" r="12" fill="#e2b990" stroke="#835d42" stroke-width="1.5"/><path d="M20 25Q18 9 32 9Q46 9 44 25L40 20 24 20Z" fill="#554233"/><path d="M23 18Q32 11 41 18" fill="none" stroke="#d6bd83" stroke-width="3"/><circle cx="27" cy="27" r="1.4" fill="#29313a"/><circle cx="37" cy="27" r="1.4" fill="#29313a"/>
+ <path d="M45 38L55 19" stroke="url(#steel)" stroke-width="3" stroke-linecap="round"/><path d="M54 20l5-9" stroke="#d8c18b" stroke-width="3"/>
+</g></svg>
