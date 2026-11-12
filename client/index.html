@@ -43,7 +43,7 @@
         </div>
         <div class="game-bottom">
           <div class="chat-panel"><div class="chat-tabs"><b>GERAL</b><span>COMBATE</span><span>SISTEMA</span><i>● Conectividade local</i></div><div class="chat-message" id="notice"><b>[MUNDO]</b> Bem-vindo a Eldoria, viajante. Sua jornada começa agora.</div></div>
-          <div class="action-panel"><button class="action-slot active" id="attack" title="Atacar (Espaço)">⚔</button><div class="action-slot">Ⅱ</div><div class="action-slot">Ⅲ</div><div class="action-slot">Ⅳ</div><div class="action-slot">Ⅴ</div><div class="action-slot">Ⅵ</div><button id="center" class="center-button" title="Centralizar personagem">◎</button></div>
+          <div class="action-panel"><button class="action-slot active" id="attack" title="Atacar (Espaço)">⚔</button><button class="action-slot" id="skill-1" title="Habilidade especial (1)">Ⅰ</button><button class="action-slot" id="skill-2" title="Recuperar vida (2)">Ⅱ</button><button class="action-slot" id="skill-3" title="Habilidade suprema (3)">Ⅲ</button><button class="action-slot" id="inventory-open" title="Inventário (I)">▣</button><div class="action-slot" title="Em breve">Ⅴ</div><button id="center" class="center-button" title="Centralizar personagem">◎</button></div>
         </div>
       </section>
 
@@ -60,7 +60,7 @@
         <div class="world-card"><div class="weather">☀</div><div><b>Tempo agradável</b><small>Brisa suave · 22°C</small></div></div>
         <div class="build-label">PIXEL ART ANIMADA · 0.5</div>
       </aside>
-    </main>
+    </main><div class="inventory-overlay" id="inventory" aria-hidden="true"><section class="inventory-window"><header><div><small>REINOS DE ELDORIA</small><h2>Inventário & Equipamentos</h2></div><button id="inventory-close" aria-label="Fechar">×</button></header><div class="inventory-content"><div class="equipment-column"><h3>EQUIPAMENTO</h3><div class="equipment-slot"><span>⚔</span><div><b id="equip-weapon">Arma inicial</b><small>Arma principal</small></div></div><div class="equipment-slot"><span>🛡</span><div><b id="equip-armor">Armadura de viajante</b><small>Peitoral</small></div></div><div class="equipment-slot"><span>💍</span><div><b id="equip-charm">Amuleto simples</b><small>Acessório</small></div></div><p class="equipment-bonus" id="equipment-bonus">Bônus: +0 ataque · +0 defesa</p></div><div class="bag-column"><h3>MOCHILA <small id="bag-count">3 / 24</small></h3><div class="bag-grid" id="bag-grid"><button data-item="iron-sword"><span>⚔</span><b>Espada de Ferro</b><small>+4 ATQ</small></button><button data-item="leather-armor"><span>🛡</span><b>Armadura de Couro</b><small>+3 DEF</small></button><button data-item="health-potion"><span>🧪</span><b>Poção de Vida</b><small>Consumível</small></button></div></div></div><footer>Itens de demonstração desta versão. O salvamento permanente será conectado ao sistema de personagens.</footer></section></div>
   </div>
   <script src="src/game.js"></script>
 </body>
