@@ -1,19 +1,30 @@
-# Reinos de Eldoria — Protótipo 0.1
+# Reinos de Eldoria — Protótipo visual 0.3
 
-RPG medieval 2D top-down para navegador. O cliente inicial pode ser publicado em hospedagem estática.
+RPG medieval 2D top-down para navegador, com movimento por clique, interface de MMORPG e efeitos visuais demonstrativos.
 
-## Executar / publicar
-- A página inicial está em `client/index.html`.
-- Para Cloudflare Pages, configure o repositório GitHub `luizonline/ReinosDeEldoria`, branch `main`, diretório de saída `client`.
-- Não é necessário comando de build para este protótipo.
+## Publicação
+- Repositório: `luizonline/ReinosDeEldoria`
+- Cloudflare Pages: configure a branch `main`, sem comando de build e diretório de saída `client`.
+- O cliente estático é publicado automaticamente a cada atualização na branch principal.
 
 ## Controles
-Clique no terreno para caminhar. Clique no Guardião ou no Slime para interagir.
+- Clique no terreno para caminhar.
+- Clique no Guardião para conversar.
+- Clique no Slime Verde para visualizar um efeito mágico demonstrativo.
+- Pressione H ou use o botão de ajuda para ver as instruções.
 
-## Estado atual
-Esta versão é um protótipo jogável local no navegador. Ainda não há multiplayer conectado, persistência, contas, inventário real ou combate. O esqueleto do servidor em `server/` é independente e não deve ser confundido com um servidor multiplayer operacional.
+## Recursos nesta versão
+- Interface de RPG com painéis de personagem, atributos, missão, chat e atalhos.
+- Mapa top-down com estrada, rio, casas, árvores e detalhes de cenário.
+- Spritesheets SVG originais do aventureiro e do Slime.
+- Animação de caminhada do aventureiro e animação de idle do Slime.
+- Efeito visual arcano com partículas.
+
+## Limitações atuais
+Ainda não há multiplayer conectado, persistência, contas, inventário funcional, combate com dano, progressão ou missões concluíveis. O servidor em `server/` permanece apenas como esqueleto inicial; não está operacional para jogadores.
 
 ## Próximos marcos
-1. Servidor Colyseus autoritativo e sincronização de jogadores.
+1. Sincronização multiplayer em servidor autoritativo.
 2. Criação e persistência de personagens.
-3. Combate, monstros, drops, itens e missões.
+3. Combate real, atributos, vida, mana e IA básica de monstros.
+4. Inventário, equipamentos, drops, missões e NPCs.
