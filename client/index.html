@@ -3,42 +3,65 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="theme-color" content="#101713">
+  <meta name="theme-color" content="#0c1118">
+  <meta name="description" content="Reinos de Eldoria — RPG medieval 2D">
   <title>Reinos de Eldoria</title>
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <header>
-    <b>✦ REINOS DE ELDORIA</b>
-    <span>RPG MEDIEVAL ONLINE · PROTÓTIPO 0.1</span>
-  </header>
-  <main>
-    <aside>
-      <h3>PERSONAGEM</h3>
-      <div class="avatar">⚔</div>
-      <b>Viajante</b>
-      <small>Guerreiro · Nível 1</small>
-      <p>HP <strong>100/100</strong><meter value="100" max="100"></meter></p>
-      <p>MP <strong>30/40</strong><meter value="30" max="40"></meter></p>
-      <hr>
-      <small>Clique no chão para caminhar. Explore a vila e encontre o Guardião.</small>
-      <p id="coords" aria-live="polite"></p>
-    </aside>
-    <section>
-      <div class="bar"><b>🌲 Planícies de Eldoria</b><span id="notice" aria-live="polite">Bem-vindo, viajante!</span></div>
-      <canvas id="world" width="960" height="600" aria-label="Mapa de Eldoria. Clique para mover seu personagem."></canvas>
-      <div class="bar foot">CONTROLES: CLIQUE PARA MOVER <span>Multiplayer em desenvolvimento</span></div>
-    </section>
-    <aside>
-      <h3>JORNADA</h3>
-      <p>◇ Visite o Guardião</p>
-      <p>◇ Encontre o Slime Verde</p>
-      <hr>
-      <button id="center" type="button">Centralizar personagem</button>
-      <button id="help" type="button">Como jogar</button>
-      <small>Protótipo · progresso não salvo</small>
-    </aside>
-  </main>
+  <div class="app-shell">
+    <header class="topbar">
+      <a class="brand" href="#" aria-label="Reinos de Eldoria">
+        <span class="brand-mark">✦</span><span><strong>REINOS DE <i>ELDORIA</i></strong><small>CRÔNICAS DO REINO</small></span>
+      </a>
+      <div class="world-title"><span class="live-dot"></span><span><b>PLANÍCIES DE ELDORIA</b><small>Reino de Valória · Região inicial</small></span></div>
+      <div class="top-actions"><span class="server-status"><i></i> Mundo disponível</span><button class="icon-button" id="help" aria-label="Ajuda" title="Ajuda">?</button><div class="profile-chip"><span class="profile-icon">⚔</span><span><b>Viajante</b><small>Nível 1 · Guerreiro</small></span></div></div>
+    </header>
+
+    <main class="game-layout">
+      <aside class="panel character-panel">
+        <div class="panel-heading"><span>PERSONAGEM</span><span class="tiny-gem">◆</span></div>
+        <div class="portrait-wrap"><div class="portrait-ring"><div class="portrait">♞</div></div><span class="level-badge">1</span></div>
+        <h1>Viajante</h1><p class="class-label">GUERREIRO NOVATO</p>
+        <div class="xp-line"><span>EXPERIÊNCIA</span><b>0 / 100</b></div><div class="xp-track"><i></i></div>
+        <div class="stat-block"><div class="stat-label"><span>♥ VIDA</span><b>100 <small>/ 100</small></b></div><div class="meter hp"><i></i></div></div>
+        <div class="stat-block"><div class="stat-label"><span>✧ MANA</span><b>40 <small>/ 40</small></b></div><div class="meter mp"><i></i></div></div>
+        <div class="stat-block"><div class="stat-label"><span>⚔ ENERGIA</span><b>100 <small>/ 100</small></b></div><div class="meter stamina"><i></i></div></div>
+        <div class="divider"></div>
+        <div class="panel-heading"><span>ATRIBUTOS</span><span class="muted">BÁSICOS</span></div>
+        <div class="attribute"><span>Força</span><b>10</b></div><div class="attribute"><span>Agilidade</span><b>5</b></div><div class="attribute"><span>Inteligência</span><b>4</b></div><div class="attribute"><span>Defesa</span><b>8</b></div>
+        <div class="panel-note">Seu progresso será salvo quando o sistema de personagens estiver conectado.</div>
+      </aside>
+
+      <section class="game-center">
+        <div class="map-frame">
+          <div class="map-topline"><span class="map-tag"><i></i> EXPLORAÇÃO</span><span class="map-coords" id="coords">X: 470 · Y: 420</span></div>
+          <canvas id="world" width="1200" height="760" aria-label="Mapa de Eldoria. Clique no terreno para caminhar."></canvas>
+          <div class="location-card"><span class="location-icon">⌖</span><span><b>Planícies de Eldoria</b><small>Uma terra de novas jornadas</small></span></div>
+          <div class="minimap"><div class="mini-title">MAPA DA REGIÃO <span>◉</span></div><div class="mini-map-art"><i class="mini-player"></i><i class="mini-water"></i><i class="mini-road"></i></div></div>
+          <div class="map-hint">CLIQUE NO MAPA PARA SE MOVER</div>
+        </div>
+        <div class="game-bottom">
+          <div class="chat-panel"><div class="chat-tabs"><b>GERAL</b><span>COMBATE</span><span>SISTEMA</span><i>● Conectividade local</i></div><div class="chat-message" id="notice"><b>[MUNDO]</b> Bem-vindo a Eldoria, viajante. Sua jornada começa agora.</div></div>
+          <div class="action-panel"><div class="action-slot active">Ⅰ</div><div class="action-slot">Ⅱ</div><div class="action-slot">Ⅲ</div><div class="action-slot">Ⅳ</div><div class="action-slot">Ⅴ</div><div class="action-slot">Ⅵ</div><button id="center" class="center-button" title="Centralizar personagem">◎</button></div>
+        </div>
+      </section>
+
+      <aside class="panel quest-panel">
+        <div class="panel-heading"><span>DIÁRIO DE JORNADA</span><span class="tiny-gem">✧</span></div>
+        <div class="quest-banner"><span>✦</span><b>O INÍCIO DE UMA LENDA</b><small>MISSÃO PRINCIPAL</small></div>
+        <h2>Primeiros passos</h2><p class="quest-copy">Conheça os habitantes desta região e descubra o que ameaça a tranquilidade das planícies.</p>
+        <div class="quest-objective"><span class="objective-icon">♙</span><span><b>Encontre o Guardião</b><small>Procure o guardião perto da vila.</small></span><em>0/1</em></div>
+        <div class="quest-objective"><span class="objective-icon green">♟</span><span><b>Observe a criatura</b><small>Localize um Slime Verde.</small></span><em>0/1</em></div>
+        <div class="divider"></div>
+        <div class="panel-heading"><span>ATALHOS</span></div>
+        <button class="menu-button" id="quest-help"><span>✧</span> Como jogar <kbd>H</kbd></button>
+        <button class="menu-button" id="center-side"><span>⌖</span> Centralizar personagem</button>
+        <div class="world-card"><div class="weather">☀</div><div><b>Tempo agradável</b><small>Brisa suave · 22°C</small></div></div>
+        <div class="build-label">PROTÓTIPO VISUAL · 0.2</div>
+      </aside>
+    </main>
+  </div>
   <script src="src/game.js"></script>
 </body>
 </html>
