@@ -62,3 +62,5 @@ button:focus-visible{outline:2px solid var(--gold);outline-offset:2px}
 .bag-grid button span{font-size:24px;color:#e4c77f}.bag-grid button b{font-size:9px;text-align:center}.bag-grid button small{font-size:8px;color:#a7b6c2}
 .inventory-window footer{border-top:1px solid #354453;padding-top:12px;font-size:9px;line-height:1.5;color:#8192a0}
 @media(max-width:560px){.inventory-content{grid-template-columns:1fr}.inventory-window{padding:14px}.bag-grid{grid-template-columns:repeat(3,minmax(0,1fr))}}
+
+.save-status{font-size:8px;color:#91b9a2;margin:5px 0 0;padding:7px 9px;border-left:2px solid #6da987;background:#13251f;border-radius:0 5px 5px 0}
