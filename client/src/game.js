@@ -5,6 +5,7 @@ ctx.imageSmoothingEnabled=false;
 const W=2400,H=1800,camera={x:0,y:0};
 const player={x:520,y:500,tx:520,ty:500,step:0,running:false};
 const guardian={x:760,y:390},slime={x:1240,y:720};
+const scenery=[];
 const heroSprite=new Image(),slimeSprite=new Image();
 heroSprite.src="assets/sprites/player-walk.svg";slimeSprite.src="assets/sprites/slime-idle.svg";
 const effects=[];
@@ -83,13 +84,13 @@ function drawDecoration(c,x,y,type,seed){c.save();c.translate(x,y);if(type==="to
 function buildWorld(){
  const off=document.createElement("canvas");off.width=W;off.height=H;const c=off.getContext("2d");c.imageSmoothingEnabled=false;
  drawGround(c);
- drawHouse(c,420,900,1.12,1);drawHouse(c,1480,320,.95,0);drawHouse(c,1040,1130,.82,1);
+ scenery.push({type:"house",x:420,y:900,scale:1.12,kind:1,depth:1008},{type:"house",x:1480,y:320,scale:.95,kind:0,depth:420},{type:"house",x:1040,y:1130,scale:.82,kind:1,depth:1216});
  // Trees clustered around clearings, river and paths
  for(let i=0;i<430;i++){let x=rand(i+5)*W,y=rand(i+805)*H;const nearRoad=roadDistance(x,y)<92,nearSquare=Math.hypot((x-760)/1.1,(y-390))<180,nearHouse=[ [420,900],[1480,320],[1040,1130] ].some(([hx,hy])=>Math.abs(x-hx)<155&&Math.abs(y-hy)<145),inRiver=x>1660&&x<1950&&y<870;
- if(!nearRoad&&!nearSquare&&!nearHouse&&!inRiver&&!(x>2050)){drawTree(c,x,y,.62+rand(i+1300)*.7,i);}
+ if(!nearRoad&&!nearSquare&&!nearHouse&&!inRiver&&!(x>2050)){const scale=.62+rand(i+1300)*.7;scenery.push({type:"tree",x,y,scale,depth:y+17*scale,seed:i});}
  }
  // More deliberate forest edge clusters
- for(let i=0;i<70;i++){let x=rand(i+1800)*W,y=rand(i+2400)*H;if(Math.hypot(x-760,y-390)>185&&roadDistance(x,y)>95)drawTree(c,x,y,.9+rand(i+2600)*.45,i+700);}
+ for(let i=0;i<70;i++){let x=rand(i+1800)*W,y=rand(i+2400)*H;if(Math.hypot(x-760,y-390)>185&&roadDistance(x,y)>95){const scale=.9+rand(i+2600)*.45;scenery.push({type:"tree",x,y,scale,depth:y+17*scale,seed:i+700});}}
  for(let i=0;i<160;i++){let x=rand(i+3000)*W,y=rand(i+3600)*H;if(roadDistance(x,y)>85&&Math.hypot(x-760,y-390)>165)drawDecoration(c,x,y,i%5===0?"stone":"flower",i);}
  for(const [x,y] of [[360,520],[620,650],[1040,650],[1380,780],[1810,900],[1160,1080],[870,290],[1510,500]])drawDecoration(c,x,y,"torch",0);
  // Fountain in the village square
@@ -161,9 +162,22 @@ function drawPixelHero(x,y,t){
  if(chosenClass==="priest"){ctx.fillStyle="#bd4149";ctx.fillRect(-2,-22,4,13);ctx.fillRect(-7,-18,14,4);}
  ctx.restore();
 }
+function drawSlime(x,y,t){
+ const phase=t/170,hop=Math.max(0,Math.sin(phase))*5,squash=1+Math.sin(phase*2)*.08;
+ ctx.save();ctx.translate(x,y-hop);ctx.scale(squash,1/squash);
+ ctx.fillStyle="#142d2188";ctx.beginPath();ctx.ellipse(0,7,22,6,0,0,Math.PI*2);ctx.fill();
+ const g=ctx.createRadialGradient(-7,-16,2,0,-9,28);g.addColorStop(0,"#b9ffd1");g.addColorStop(.48,"#55d98a");g.addColorStop(1,"#168653");
+ ctx.fillStyle=g;ctx.strokeStyle="#14563a";ctx.lineWidth=2;ctx.beginPath();ctx.moveTo(-21,2);ctx.quadraticCurveTo(-26,-17,-12,-25);ctx.quadraticCurveTo(0,-34,13,-24);ctx.quadraticCurveTo(27,-14,21,2);ctx.quadraticCurveTo(0,13,-21,2);ctx.fill();ctx.stroke();
+ ctx.fillStyle="#e7fff0";ctx.beginPath();ctx.ellipse(-8,-13,4,6,0,0,Math.PI*2);ctx.ellipse(8,-13,4,6,0,0,Math.PI*2);ctx.fill();
+ ctx.fillStyle="#173b30";ctx.fillRect(-8,-13,3,4);ctx.fillRect(7,-13,3,4);
+ ctx.strokeStyle="#174c36";ctx.lineWidth=2;ctx.beginPath();ctx.arc(0,-5,5,.15,Math.PI-.15);ctx.stroke();
+ ctx.fillStyle="#d6ffe1";ctx.globalAlpha=.55;ctx.beginPath();ctx.arc(-11,-22,4,0,Math.PI*2);ctx.fill();ctx.restore();
+ ctx.fillStyle="#26352d";ctx.fillRect(x-24,y-43-hop,48,6);ctx.fillStyle="#d94f58";ctx.fillRect(x-23,y-42-hop,46*Math.max(0,monsterHp/60),4);
+ label("Slime Verde",x,y-49-hop,"#caffc8");
+}
 function drawActor(x,y,type,t){
  if(type==="player"){ctx.fillStyle="#08120d88";ctx.beginPath();ctx.ellipse(x,y+3,17,6,0,0,Math.PI*2);ctx.fill();if(!drawClassSpriteSheet(x,y,t))drawPixelHero(x,y,t);label("Viajante",x,y-57);return;}
- if(type==="slime"&&monsterAlive&&slimeSprite.complete&&slimeSprite.naturalWidth){const frame=Math.floor(t/180)%3;ctx.drawImage(slimeSprite,frame*64,0,64,64,x-23,y-29,46,46);ctx.fillStyle="#26352d";ctx.fillRect(x-22,y-42,44,5);ctx.fillStyle="#d94f58";ctx.fillRect(x-21,y-41,42*Math.max(0,monsterHp/60),3);label("Slime Verde",x,y-46,"#caffc8");return;}
+ if(type==="slime"&&monsterAlive){drawSlime(x,y,t);return;}
  ctx.fillStyle="#1b2c24";ctx.beginPath();ctx.ellipse(x,y+5,13,6,0,0,Math.PI*2);ctx.fill();ctx.fillStyle="#9b7843";ctx.fillRect(x-9,y-18,18,22);ctx.fillStyle="#dfbd91";ctx.beginPath();ctx.arc(x,y-24,8,0,Math.PI*2);ctx.fill();ctx.fillStyle="#57402f";ctx.fillRect(x-9,y-31,18,6);ctx.fillStyle="#d4b66f";ctx.fillRect(x-12,y-18,24,4);label("Guardião",x,y-38,"#ffe2a0");
 }
 const projectiles=[];
@@ -184,7 +198,7 @@ function drawAtmosphere(t){
 function draw(t){ctx.clearRect(0,0,canvas.width,canvas.height);ctx.save();ctx.translate(-camera.x,-camera.y);ctx.drawImage(world,0,0);drawAtmosphere(t);
  // firelight glow and ambient light pools
  for(const [x,y] of [[360,520],[620,650],[1040,650],[1380,780],[1810,900],[1160,1080],[870,290],[1510,500]]){const g=ctx.createRadialGradient(x,y-8,2,x,y-8,55);g.addColorStop(0,"#ffd47a44");g.addColorStop(1,"#ffd47a00");ctx.fillStyle=g;ctx.fillRect(x-55,y-63,110,110);}
- drawActor(guardian.x,guardian.y,"guardian",t);if(monsterAlive)drawActor(slime.x,slime.y,"slime",t);drawActor(player.x,player.y,"player",t);drawEffects(16,t);drawProjectiles(1/60);
+ const depthActors=[...scenery.map(o=>({depth:o.depth,draw:()=>o.type==="tree"?drawTree(ctx,o.x,o.y,o.scale,o.seed):drawHouse(ctx,o.x,o.y,o.scale,o.kind)})),{depth:guardian.y,draw:()=>drawActor(guardian.x,guardian.y,"guardian",t)},{depth:slime.y,draw:()=>{if(monsterAlive)drawActor(slime.x,slime.y,"slime",t);}},{depth:player.y,draw:()=>drawActor(player.x,player.y,"player",t)}];depthActors.sort((a,b)=>a.depth-b.depth);for(const actor of depthActors)actor.draw();drawEffects(16,t);drawProjectiles(1/60);
  ctx.strokeStyle="#f7df9b99";ctx.setLineDash([6,7]);ctx.beginPath();ctx.moveTo(player.x,player.y);ctx.lineTo(player.tx,player.ty);ctx.stroke();ctx.setLineDash([]);ctx.fillStyle="#ffe19a";ctx.beginPath();ctx.arc(player.tx,player.ty,4+Math.sin(t/90)*2,0,Math.PI*2);ctx.fill();ctx.strokeStyle="#ffe19a66";ctx.lineWidth=1;ctx.beginPath();ctx.arc(player.tx,player.ty,10+Math.sin(t/130)*2,0,Math.PI*2);ctx.stroke();ctx.restore();}
 function frame(t){const dt=Math.min((t-(frame.last||t))/1000,.04);frame.last=t;attackCooldown=Math.max(0,attackCooldown-((dt)||0));attackState=Math.max(0,attackState-((dt)||0)*3.5);const dx=player.tx-player.x,dy=player.ty-player.y,d=Math.hypot(dx,dy);if(combatTarget==="slime"&&monsterAlive){const cd=classData[chosenClass],dist=Math.hypot(slime.x-player.x,slime.y-player.y);if(dist>cd.range){const ratio=(dist-cd.range+5)/Math.max(1,dist);player.tx=slime.x-(slime.x-player.x)*ratio;player.ty=slime.y-(slime.y-player.y)*ratio;}else{player.tx=player.x;player.ty=player.y;if(attackCooldown<=0)attack();}}if(d>2){const step=Math.min(d,classData[chosenClass].speed*(player.running?1.48:1)*dt);player.x+=dx/d*step;player.y+=dy/d*step;player.step+=dt*9;}camera.x=Math.max(0,Math.min(W-canvas.width,player.x-canvas.width/2));camera.y=Math.max(0,Math.min(H-canvas.height,player.y-canvas.height/2));coords.textContent="X: "+Math.round(player.x)+" · Y: "+Math.round(player.y);draw(t);requestAnimationFrame(frame);}
 function chooseClass(id){if(!classData[id])return;chosenClass=id;const d=classData[id];playerHp=d.hp;playerMp=d.mp;document.querySelector("#class-name").textContent=d.name.toUpperCase()+" · NÍVEL 1";document.querySelectorAll(".class-choice").forEach(b=>b.classList.toggle("selected",b.dataset.class===id));document.querySelector(".profile-chip small").textContent="Nível 1 · "+d.name;document.querySelector(".profile-icon").textContent=id==="mage"?"✦":id==="priest"?"✚":id==="longbowman"?"➶":id==="cavalry"?"♞":id==="assassin"?"🗡":"🛡";notice.innerHTML="<b>[CLASSE]</b> Classe alterada para "+d.name+". Experimente caminhar e atacar o Slime.";}
