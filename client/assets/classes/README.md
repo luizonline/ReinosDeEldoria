@@ -6,12 +6,12 @@ O cliente já possui carregador de spritesheets por classe em `client/src/game.j
 
 Coloque estes seis arquivos PNG com fundo transparente nesta pasta:
 
-- `assassin.png`
-- `mage.png`
-- `priest.png`
-- `longbowman.png`
-- `cavalry.png`
-- `soldier.png`
+- `assassin.svg`
+- `mage.svg`
+- `priest.svg`
+- `longbowman.svg`
+- `cavalry.svg`
+- `soldier.svg`
 
 ## Grade obrigatória
 
