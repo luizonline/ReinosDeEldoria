@@ -8,6 +8,8 @@ const guardian={x:760,y:390},slime={x:1240,y:720};
 const heroSprite=new Image(),slimeSprite=new Image();
 heroSprite.src="assets/sprites/player-walk.svg";slimeSprite.src="assets/sprites/slime-idle.svg";
 const effects=[];
+const classData={soldier:{name:"Soldado",hp:130,mp:35,damage:14,speed:185,color:"#547c9b",accent:"#c5d5dc",weapon:"sword"},assassin:{name:"Assassino",hp:85,mp:45,damage:19,speed:235,color:"#294d87",accent:"#51c9d5",weapon:"dagger"},mage:{name:"Mago",hp:75,mp:110,damage:24,speed:175,color:"#9b3041",accent:"#c69aff",weapon:"staff"},priest:{name:"Clérigo",hp:100,mp:100,damage:13,speed:180,color:"#d5d8d0",accent:"#c84e55",weapon:"staff"},longbowman:{name:"Arqueiro",hp:90,mp:55,damage:17,speed:205,color:"#8a7047",accent:"#c5a66a",weapon:"bow"},cavalry:{name:"Cavalaria",hp:145,mp:40,damage:17,speed:195,color:"#456f85",accent:"#d6dbe0",weapon:"lance"}};
+let chosenClass="soldier",attackState=0,attackCooldown=0,combatTarget=null,playerHp=130,playerMp=35,playerXp=0,monsterHp=60,monsterAlive=true;
 const rand=n=>{const v=Math.sin(n*127.1+311.7)*43758.5453;return v-Math.floor(v)};
 const pathPoints=[[0,570],[250,560],[440,610],[650,570],[850,660],[1040,740],[1240,730],[1440,770],[1660,720],[1840,810],[2030,850],[2400,900]];
 function segDistance(px,py,a,b){const dx=b[0]-a[0],dy=b[1]-a[1],l=dx*dx+dy*dy;const t=Math.max(0,Math.min(1,((px-a[0])*dx+(py-a[1])*dy)/(l||1)));return Math.hypot(px-a[0]-t*dx,py-a[1]-t*dy);}
@@ -79,9 +81,31 @@ function buildWorld(){
 }
 const world=buildWorld();
 function label(text,x,y,color="#f5f0d7"){ctx.font="bold 13px Arial";ctx.textAlign="center";ctx.lineWidth=3;ctx.strokeStyle="#243226";ctx.strokeText(text,x,y);ctx.fillStyle=color;ctx.fillText(text,x,y);}
+function drawPixelHero(x,y,t){
+ const d=classData[chosenClass],moving=Math.hypot(player.tx-player.x,player.ty-player.y)>3,frame=moving?Math.floor(t/105)%4:0,attacking=attackState>0;
+ const bob=moving?Math.sin(t/65)*2:Math.sin(t/280)*.7,leg=Math.sin(t/75)*4;
+ ctx.save();ctx.translate(Math.round(x),Math.round(y+bob));ctx.imageSmoothingEnabled=false;
+ // sombra e pernas animadas
+ ctx.fillStyle="#17251f99";ctx.fillRect(-13,8,27,5);ctx.fillStyle="#40382f";ctx.fillRect(-8+ (moving?leg:0),-1,7,12);ctx.fillRect(2-(moving?leg:0),-1,7,12);
+ ctx.fillStyle=d.accent;ctx.fillRect(-9+(moving?leg:0),8,9,4);ctx.fillRect(1-(moving?leg:0),8,9,4);
+ // capa e tronco em blocos pixelados
+ ctx.fillStyle=d.color;ctx.fillRect(-12,-23,24,24);ctx.fillRect(-15,-19,5,17);ctx.fillRect(10,-19,5,17);
+ ctx.fillStyle=d.accent;ctx.fillRect(-10,-22,20,4);ctx.fillRect(-3,-14,6,8);
+ // cabeça, cabelo/capuz e rosto
+ ctx.fillStyle="#d9ad87";ctx.fillRect(-7,-37,14,14);ctx.fillRect(-9,-34,3,8);ctx.fillRect(6,-34,3,8);
+ ctx.fillStyle=chosenClass==="assassin"?"#172b50":chosenClass==="mage"?"#7c1e2e":chosenClass==="priest"?"#e4e1d5":chosenClass==="longbowman"?"#655239":chosenClass==="cavalry"?"#3e5669":"#55412e";ctx.fillRect(-9,-41,18,7);ctx.fillRect(-7,-44,14,4);
+ ctx.fillStyle="#262d35";ctx.fillRect(-4,-31,2,2);ctx.fillRect(3,-31,2,2);
+ // equipamento característico
+ ctx.strokeStyle=d.accent;ctx.lineWidth=3;ctx.beginPath();
+ if(d.weapon==="sword"||d.weapon==="dagger"){const swing=attacking?Math.sin((1-attackState)*Math.PI)*20:0;ctx.moveTo(11,-17);ctx.lineTo(19+swing,-31);ctx.stroke();ctx.fillStyle="#e2d6b8";ctx.fillRect(9,-19,7,3);}
+ if(d.weapon==="staff"){ctx.moveTo(14,-17);ctx.lineTo(14,-49);ctx.stroke();ctx.fillStyle="#c6a0ff";ctx.fillRect(10,-53,8,8);ctx.fillStyle="#f1e4ff";ctx.fillRect(13,-56,3,3);}
+ if(d.weapon==="bow"){ctx.beginPath();ctx.arc(14,-25,12,-1.2,1.2);ctx.stroke();ctx.beginPath();ctx.moveTo(14,-36);ctx.lineTo(14,-14);ctx.stroke();}
+ if(d.weapon==="lance"){ctx.moveTo(13,-13);ctx.lineTo(23,-52);ctx.stroke();ctx.fillStyle="#e8e4d4";ctx.fillRect(20,-57,5,9);}
+ ctx.restore();
+}
 function drawActor(x,y,type,t){
- if(type==="player"&&heroSprite.complete&&heroSprite.naturalWidth){const moving=Math.hypot(player.tx-player.x,player.ty-player.y)>3,frame=moving?Math.floor(t/130)%4:0;ctx.drawImage(heroSprite,frame*64,0,64,80,x-24,y-51,48,60);label("Viajante",x,y-56);return;}
- if(type==="slime"&&slimeSprite.complete&&slimeSprite.naturalWidth){const frame=Math.floor(t/260)%3;ctx.drawImage(slimeSprite,frame*64,0,64,64,x-23,y-29,46,46);label("Slime Verde",x,y-31,"#caffc8");return;}
+ if(type==="player"){drawPixelHero(x,y,t);label("Viajante",x,y-51);return;}
+ if(type==="slime"&&monsterAlive&&slimeSprite.complete&&slimeSprite.naturalWidth){const frame=Math.floor(t/180)%3;ctx.drawImage(slimeSprite,frame*64,0,64,64,x-23,y-29,46,46);ctx.fillStyle="#26352d";ctx.fillRect(x-22,y-42,44,5);ctx.fillStyle="#d94f58";ctx.fillRect(x-21,y-41,42*Math.max(0,monsterHp/60),3);label("Slime Verde",x,y-46,"#caffc8");return;}
  ctx.fillStyle="#1b2c24";ctx.beginPath();ctx.ellipse(x,y+5,13,6,0,0,Math.PI*2);ctx.fill();ctx.fillStyle="#9b7843";ctx.fillRect(x-9,y-18,18,22);ctx.fillStyle="#dfbd91";ctx.beginPath();ctx.arc(x,y-24,8,0,Math.PI*2);ctx.fill();ctx.fillStyle="#57402f";ctx.fillRect(x-9,y-31,18,6);ctx.fillStyle="#d4b66f";ctx.fillRect(x-12,y-18,24,4);label("Guardião",x,y-38,"#ffe2a0");
 }
 function spawnMagic(x,y){effects.push({x:player.x,y:player.y-20,tx:x,ty:y,life:0,duration:420,kind:"bolt"});for(let i=0;i<20;i++)effects.push({x,y,vx:(rand(i+performance.now())-.5)*3,vy:(rand(i+90+performance.now())-.5)*3,life:0,duration:700,kind:"spark"});notice.innerHTML="<b>[MAGIA]</b> Pulso arcano lançado! Efeito visual demonstrativo; dano ainda não implementado.";}
@@ -89,13 +113,13 @@ function drawEffects(dt,t){for(let i=effects.length-1;i>=0;i--){const e=effects[
 function draw(t){ctx.clearRect(0,0,canvas.width,canvas.height);ctx.save();ctx.translate(-camera.x,-camera.y);ctx.drawImage(world,0,0);
  // firelight glow and ambient light pools
  for(const [x,y] of [[360,520],[620,650],[1040,650],[1380,780],[1810,900],[1160,1080],[870,290],[1510,500]]){const g=ctx.createRadialGradient(x,y-8,2,x,y-8,55);g.addColorStop(0,"#ffd47a44");g.addColorStop(1,"#ffd47a00");ctx.fillStyle=g;ctx.fillRect(x-55,y-63,110,110);}
- drawActor(guardian.x,guardian.y,"guardian",t);drawActor(slime.x,slime.y,"slime",t);drawActor(player.x,player.y,"player",t);drawEffects(16,t);
+ drawActor(guardian.x,guardian.y,"guardian",t);if(monsterAlive)drawActor(slime.x,slime.y,"slime",t);drawActor(player.x,player.y,"player",t);drawEffects(16,t);
  ctx.strokeStyle="#f7df9b99";ctx.setLineDash([6,7]);ctx.beginPath();ctx.moveTo(player.x,player.y);ctx.lineTo(player.tx,player.ty);ctx.stroke();ctx.setLineDash([]);ctx.fillStyle="#ffe19a";ctx.beginPath();ctx.arc(player.tx,player.ty,4+Math.sin(t/90)*2,0,Math.PI*2);ctx.fill();ctx.restore();}
-function frame(t){const dt=Math.min((t-(frame.last||t))/1000,.04);frame.last=t;const dx=player.tx-player.x,dy=player.ty-player.y,d=Math.hypot(dx,dy);if(d>2){const step=Math.min(d,185*dt);player.x+=dx/d*step;player.y+=dy/d*step;player.step+=dt*9;}camera.x=Math.max(0,Math.min(W-canvas.width,player.x-canvas.width/2));camera.y=Math.max(0,Math.min(H-canvas.height,player.y-canvas.height/2));coords.textContent="X: "+Math.round(player.x)+" · Y: "+Math.round(player.y);draw(t);requestAnimationFrame(frame);}
-function pointer(e){const r=canvas.getBoundingClientRect();return{x:(e.clientX-r.left)*canvas.width/r.width+camera.x,y:(e.clientY-r.top)*canvas.height/r.height+camera.y};}
-canvas.addEventListener("click",e=>{const p=pointer(e);if(Math.hypot(p.x-guardian.x,p.y-guardian.y)<45){notice.innerHTML="<b>[GUARDIÃO]</b> Bem-vindo à vila de Eldoria. Que sua jornada seja gloriosa.";return;}if(Math.hypot(p.x-slime.x,p.y-slime.y)<45){spawnMagic(slime.x,slime.y-8);return;}player.tx=Math.max(20,Math.min(W-20,p.x));player.ty=Math.max(20,Math.min(H-20,p.y));notice.innerHTML="<b>[MUNDO]</b> Você está explorando as trilhas de Eldoria.";});
+function frame(t){const dt=Math.min((t-(frame.last||t))/1000,.04);frame.last=t;attackCooldown=Math.max(0,attackCooldown-((dt)||0));attackState=Math.max(0,attackState-((dt)||0)*3.5);const dx=player.tx-player.x,dy=player.ty-player.y,d=Math.hypot(dx,dy);if(d>2){const step=Math.min(d,classData[chosenClass].speed*dt);player.x+=dx/d*step;player.y+=dy/d*step;player.step+=dt*9;}camera.x=Math.max(0,Math.min(W-canvas.width,player.x-canvas.width/2));camera.y=Math.max(0,Math.min(H-canvas.height,player.y-canvas.height/2));coords.textContent="X: "+Math.round(player.x)+" · Y: "+Math.round(player.y);draw(t);requestAnimationFrame(frame);}
+function chooseClass(id){if(!classData[id])return;chosenClass=id;const d=classData[id];playerHp=d.hp;playerMp=d.mp;document.querySelector("#class-name").textContent=d.name.toUpperCase()+" · NÍVEL 1";document.querySelectorAll(".class-choice").forEach(b=>b.classList.toggle("selected",b.dataset.class===id));document.querySelector(".profile-chip small").textContent="Nível 1 · "+d.name;document.querySelector(".profile-icon").textContent=id==="mage"?"✦":id==="priest"?"✚":id==="longbowman"?"➶":id==="cavalry"?"♞":id==="assassin"?"🗡":"🛡";notice.innerHTML="<b>[CLASSE]</b> Classe alterada para "+d.name+". Experimente caminhar e atacar o Slime.";}\nfunction attack(){if(!monsterAlive){notice.innerHTML="<b>[COMBATE]</b> Não há monstros vivos neste ponto.";return;}if(attackCooldown>0)return;const dist=Math.hypot(slime.x-player.x,slime.y-player.y);if(dist>62){player.tx=slime.x+(player.x<slime.x?-42:42);player.ty=slime.y+16;combatTarget="slime";notice.innerHTML="<b>[COMBATE]</b> Aproximando-se do Slime...";return;}attackState=1;attackCooldown=.55;monsterHp-=classData[chosenClass].damage;const d=classData[chosenClass];if(d.weapon==="staff"){spawnMagic(slime.x,slime.y-8);}else{effects.push({kind:"hit",x:slime.x,y:slime.y-8,life:0,duration:260});}if(monsterHp<=0){monsterHp=0;monsterAlive=false;playerXp+=25;notice.innerHTML="<b>[COMBATE]</b> Slime derrotado! +25 EXP. (Reaparecerá em alguns segundos.)";setTimeout(()=>{monsterHp=60;monsterAlive=true;},4500);}else notice.innerHTML="<b>[COMBATE]</b> "+d.name+" causou "+d.damage+" de dano! Vida do Slime: "+monsterHp+"/60.";}\nfunction pointer(e){const r=canvas.getBoundingClientRect();return{x:(e.clientX-r.left)*canvas.width/r.width+camera.x,y:(e.clientY-r.top)*canvas.height/r.height+camera.y};}
+canvas.addEventListener("click",e=>{const p=pointer(e);if(Math.hypot(p.x-guardian.x,p.y-guardian.y)<45){notice.innerHTML="<b>[GUARDIÃO]</b> Bem-vindo à vila de Eldoria. Que sua jornada seja gloriosa.";return;}if(monsterAlive&&Math.hypot(p.x-slime.x,p.y-slime.y)<55){attack();return;}player.tx=Math.max(20,Math.min(W-20,p.x));player.ty=Math.max(20,Math.min(H-20,p.y));notice.innerHTML="<b>[MUNDO]</b> Você está explorando as trilhas de Eldoria.";});
 function center(){player.tx=player.x;player.ty=player.y;notice.innerHTML="<b>[SISTEMA]</b> Personagem centralizado.";}
 function help(){notice.innerHTML="<b>[AJUDA]</b> Clique no terreno para caminhar. Clique no Guardião para conversar ou no Slime para testar o efeito mágico.";}
-document.querySelector("#center").addEventListener("click",center);document.querySelector("#center-side").addEventListener("click",center);document.querySelector("#help").addEventListener("click",help);document.querySelector("#quest-help").addEventListener("click",help);window.addEventListener("keydown",e=>{if(e.key.toLowerCase()==="h")help();});
+document.querySelectorAll(".class-choice").forEach(b=>b.addEventListener("click",()=>chooseClass(b.dataset.class)));document.querySelector("#attack").addEventListener("click",attack);document.querySelector("#center").addEventListener("click",center);document.querySelector("#center-side").addEventListener("click",center);document.querySelector("#help").addEventListener("click",help);document.querySelector("#quest-help").addEventListener("click",help);window.addEventListener("keydown",e=>{if(e.key.toLowerCase()==="h")help();if(e.code==="Space"){e.preventDefault();attack();}});
 requestAnimationFrame(frame);
 })();
