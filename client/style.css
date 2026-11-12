@@ -35,3 +35,8 @@ button:focus-visible{outline:2px solid var(--gold);outline-offset:2px}
 .quest-banner{box-shadow:inset 0 0 28px #d9b76d0c,0 8px 20px #0002}
 @media(min-width:1500px){.game-layout{grid-template-columns:235px minmax(520px,1fr) 250px;gap:16px}.panel{padding:18px}.map-frame{min-height:620px}}
 @media(prefers-reduced-motion:reduce){*,*:before,*:after{scroll-behavior:auto!important;transition:none!important;animation:none!important}}
+
+/* Habilidades e monstros: feedback de interface */
+#skill-1,#skill-2,#skill-3{position:relative;color:#e8ce91;border-color:#806b43;background:linear-gradient(145deg,#354050,#1a2633)}
+#skill-1:hover,#skill-2:hover,#skill-3:hover{border-color:#f0d18b;box-shadow:0 0 13px #d9b76d33}
+.action-slot[title="Em breve"]{opacity:.48;cursor:not-allowed}
