@@ -82,25 +82,66 @@ function buildWorld(){
 const world=buildWorld();
 function label(text,x,y,color="#f5f0d7"){ctx.font="bold 13px Arial";ctx.textAlign="center";ctx.lineWidth=3;ctx.strokeStyle="#243226";ctx.strokeText(text,x,y);ctx.fillStyle=color;ctx.fillText(text,x,y);}
 function drawPixelHero(x,y,t){
- const d=classData[chosenClass],moving=Math.hypot(player.tx-player.x,player.ty-player.y)>3,frame=moving?Math.floor(t/105)%4:0,attacking=attackState>0;
- const bob=moving?Math.sin(t/65)*2:Math.sin(t/280)*.7,leg=Math.sin(t/75)*4;
- ctx.save();ctx.translate(Math.round(x),Math.round(y+bob));ctx.imageSmoothingEnabled=false;
- // sombra e pernas animadas
- ctx.fillStyle="#17251f99";ctx.fillRect(-13,8,27,5);ctx.fillStyle="#40382f";ctx.fillRect(-8+ (moving?leg:0),-1,7,12);ctx.fillRect(2-(moving?leg:0),-1,7,12);
- ctx.fillStyle=d.accent;ctx.fillRect(-9+(moving?leg:0),8,9,4);ctx.fillRect(1-(moving?leg:0),8,9,4);
- // capa e tronco em blocos pixelados
- ctx.fillStyle=d.color;ctx.fillRect(-12,-23,24,24);ctx.fillRect(-15,-19,5,17);ctx.fillRect(10,-19,5,17);
- ctx.fillStyle=d.accent;ctx.fillRect(-10,-22,20,4);ctx.fillRect(-3,-14,6,8);
- // cabeça, cabelo/capuz e rosto
- ctx.fillStyle="#d9ad87";ctx.fillRect(-7,-37,14,14);ctx.fillRect(-9,-34,3,8);ctx.fillRect(6,-34,3,8);
- ctx.fillStyle=chosenClass==="assassin"?"#172b50":chosenClass==="mage"?"#7c1e2e":chosenClass==="priest"?"#e4e1d5":chosenClass==="longbowman"?"#655239":chosenClass==="cavalry"?"#3e5669":"#55412e";ctx.fillRect(-9,-41,18,7);ctx.fillRect(-7,-44,14,4);
- ctx.fillStyle="#262d35";ctx.fillRect(-4,-31,2,2);ctx.fillRect(3,-31,2,2);
- // equipamento característico
- ctx.strokeStyle=d.accent;ctx.lineWidth=3;ctx.beginPath();
- if(d.weapon==="sword"||d.weapon==="dagger"){const swing=attacking?Math.sin((1-attackState)*Math.PI)*20:0;ctx.moveTo(11,-17);ctx.lineTo(19+swing,-31);ctx.stroke();ctx.fillStyle="#e2d6b8";ctx.fillRect(9,-19,7,3);}
- if(d.weapon==="staff"){ctx.moveTo(14,-17);ctx.lineTo(14,-49);ctx.stroke();ctx.fillStyle="#c6a0ff";ctx.fillRect(10,-53,8,8);ctx.fillStyle="#f1e4ff";ctx.fillRect(13,-56,3,3);}
- if(d.weapon==="bow"){ctx.beginPath();ctx.arc(14,-25,12,-1.2,1.2);ctx.stroke();ctx.beginPath();ctx.moveTo(14,-36);ctx.lineTo(14,-14);ctx.stroke();}
- if(d.weapon==="lance"){ctx.moveTo(13,-13);ctx.lineTo(23,-52);ctx.stroke();ctx.fillStyle="#e8e4d4";ctx.fillRect(20,-57,5,9);}
+ const d=classData[chosenClass];
+ const dx=player.tx-player.x,dy=player.ty-player.y;
+ const moving=Math.hypot(dx,dy)>3;
+ const direction=Math.abs(dx)>Math.abs(dy)?(dx>0?"right":"left"):(dy>0?"down":"up");
+ const runFrame=moving?Math.floor(t/95)%4:0;
+ const attackProgress=attackState>0?1-attackState:0;
+ const swing=attackState>0?Math.sin(attackProgress*Math.PI):0;
+ const bob=moving?Math.abs(Math.sin(t/70))*2:Math.sin(t/310)*.5;
+ const stride=moving?Math.sin(t/70)*4:0;
+ ctx.save();ctx.translate(Math.round(x),Math.round(y+bob));
+ // desenhado em escala de pixel art: contornos escuros, volumes e detalhes por classe
+ ctx.imageSmoothingEnabled=false;
+ ctx.fillStyle="#17251f99";ctx.fillRect(-13,9,27,5);
+ // pernas e botas animadas
+ ctx.fillStyle="#302b2a";
+ ctx.fillRect(-9+stride,-2,8,12);ctx.fillRect(2-stride,-2,8,12);
+ ctx.fillStyle=d.accent;ctx.fillRect(-9+stride,7,9,5);ctx.fillRect(1-stride,7,9,5);
+ ctx.fillStyle="#4a3529";ctx.fillRect(-10+stride,11,11,3);ctx.fillRect(1-stride,11,11,3);
+ // capa
+ ctx.fillStyle=d.color;ctx.fillRect(-13,-24,26,25);ctx.fillRect(-15,-20,4,16);ctx.fillRect(11,-20,4,16);
+ ctx.fillStyle="#172b36";ctx.fillRect(-11,-22,22,19);
+ ctx.fillStyle=d.color;ctx.fillRect(-9,-21,18,17);
+ // peitoral e cinto
+ ctx.fillStyle=d.accent;ctx.fillRect(-10,-21,20,4);ctx.fillRect(-3,-15,6,10);
+ ctx.fillStyle="#d6b66e";ctx.fillRect(-5,-7,10,3);
+ // braços
+ ctx.fillStyle="#d9ad87";ctx.fillRect(-17,-19,5,12);ctx.fillRect(12,-19,5,12);
+ ctx.fillStyle=d.color;ctx.fillRect(-17,-21,6,8);ctx.fillRect(11,-21,6,8);
+ // cabeça/capuz
+ ctx.fillStyle="#332b2c";ctx.fillRect(-10,-42,20,20);
+ ctx.fillStyle=chosenClass==="assassin"?"#183768":chosenClass==="mage"?"#8f2635":chosenClass==="priest"?"#e5e1d3":chosenClass==="longbowman"?"#735331":chosenClass==="cavalry"?"#465e70":"#55412e";
+ ctx.fillRect(-9,-41,18,17);ctx.fillRect(-7,-45,14,5);
+ ctx.fillStyle="#e0b992";ctx.fillRect(-6,-36,12,10);
+ if(direction==="up"){ctx.fillStyle=d.color;ctx.fillRect(-9,-42,18,16);ctx.fillRect(-6,-46,12,5);}
+ else{ctx.fillStyle="#252b32";ctx.fillRect(-4,-32,2,2);ctx.fillRect(3,-32,2,2);}
+ // acessórios de classe e arma
+ ctx.lineWidth=3;ctx.strokeStyle=d.accent;ctx.beginPath();
+ if(d.weapon==="sword"||d.weapon==="dagger"){
+  const reach=attackState>0?22*swing:0;
+  ctx.moveTo(13,-15);ctx.lineTo(19+reach,-34);ctx.stroke();
+  ctx.strokeStyle="#d7c9a9";ctx.lineWidth=2;ctx.beginPath();ctx.moveTo(9,-18);ctx.lineTo(17,-15);ctx.stroke();
+  if(chosenClass==="assassin"){ctx.beginPath();ctx.moveTo(-13,-15);ctx.lineTo(-20-reach,-28);ctx.stroke();}
+ }
+ if(d.weapon==="staff"){
+  ctx.moveTo(15,-15);ctx.lineTo(15,-49);ctx.stroke();
+  ctx.fillStyle="#c6a0ff";ctx.fillRect(10,-54,10,9);ctx.fillStyle="#fff0c5";ctx.fillRect(13,-57,4,4);
+  if(attackState>0){ctx.shadowColor="#9cecff";ctx.shadowBlur=16;ctx.fillStyle="#a9efff";ctx.fillRect(7,-59,16,16);ctx.shadowBlur=0;}
+ }
+ if(d.weapon==="bow"){
+  ctx.beginPath();ctx.arc(15,-25,13,-1.2,1.2);ctx.stroke();
+  ctx.beginPath();ctx.moveTo(15,-38);ctx.lineTo(15,-12);ctx.stroke();
+  if(attackState>0){ctx.strokeStyle="#f2dfad";ctx.beginPath();ctx.moveTo(15,-25);ctx.lineTo(29,-25);ctx.stroke();}
+ }
+ if(d.weapon==="lance"){
+  ctx.moveTo(14,-12);ctx.lineTo(23,-54);ctx.stroke();ctx.fillStyle="#e7e1d0";ctx.fillRect(20,-59,6,10);
+  ctx.fillStyle="#9d3135";ctx.fillRect(-12,-27,7,10);
+ }
+ // detalhe do elmo/insígnia
+ if(chosenClass==="cavalry"||chosenClass==="soldier"){ctx.fillStyle="#c3cbd1";ctx.fillRect(-8,-45,16,4);ctx.fillStyle="#b43c3c";ctx.fillRect(-2,-21,4,9);}
+ if(chosenClass==="priest"){ctx.fillStyle="#bd4149";ctx.fillRect(-2,-22,4,13);ctx.fillRect(-7,-18,14,4);}
  ctx.restore();
 }
 function drawActor(x,y,type,t){
