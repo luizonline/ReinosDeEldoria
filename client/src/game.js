@@ -5,6 +5,9 @@ const W=2400,H=1800,camera={x:0,y:0};
 const player={x:470,y:420,tx:470,ty:420,step:0};
 const guardian={x:700,y:330},slime={x:1040,y:650};
 const houses=[{x:350,y:250,w:150,h:100},{x:820,y:220,w:180,h:110},{x:540,y:740,w:250,h:125},{x:1300,y:430,w:200,h:130},{x:1700,y:950,w:260,h:140}];
+const heroSprite=new Image(),slimeSprite=new Image();
+heroSprite.src="assets/sprites/player-walk.svg";slimeSprite.src="assets/sprites/slime-idle.svg";
+const effects=[];let lastPlayerX=player.x,lastPlayerY=player.y;
 const rand=(n)=>{const v=Math.sin(n*127.1+311.7)*43758.5453;return v-Math.floor(v)};
 function path(points,width,color){ctx.beginPath();ctx.moveTo(points[0][0],points[0][1]);for(let i=1;i<points.length;i+=3){const p1=points[i]||points[i-1],p2=points[i+1]||p1,p3=points[i+2]||p2;ctx.bezierCurveTo(p1[0],p1[1],p2[0],p2[1],p3[0],p3[1]);}ctx.lineWidth=width;ctx.lineCap="round";ctx.lineJoin="round";ctx.strokeStyle=color;ctx.stroke();}
 function tree(x,y,s=1){ctx.save();ctx.translate(x,y);ctx.scale(s,s);
@@ -32,19 +35,58 @@ for(let i=0;i<12;i++){const x=280+i*110,y=570+Math.sin(i*.8)*32;ctx.fillStyle="#
 for(const [x,y] of [[630,270],[785,400],[520,670]]){ctx.fillStyle="#5c4b39";ctx.fillRect(x-3,y,6,24);ctx.fillStyle="#d4a85e";ctx.beginPath();ctx.arc(x,y-4,7,0,Math.PI*2);ctx.fill();ctx.fillStyle="#ffe4a0";ctx.globalAlpha=.7+.2*Math.sin(t/250);ctx.beginPath();ctx.arc(x,y-4,3,0,Math.PI*2);ctx.fill();ctx.globalAlpha=1;}
 }
 function label(text,x,y,color="#f2ead8"){ctx.font="600 14px DM Sans,Arial";ctx.textAlign="center";ctx.lineWidth=4;ctx.strokeStyle="#1b2a25";ctx.strokeText(text,x,y);ctx.fillStyle=color;ctx.fillText(text,x,y);}
-function actor(x,y,type,t){ctx.save();ctx.translate(x,y);const bob=Math.sin(t/180+(type==="player"?player.step:1))*2;ctx.translate(0,bob);
-ctx.fillStyle="#17251d88";ctx.beginPath();ctx.ellipse(0,14,18,8,0,0,Math.PI*2);ctx.fill();
-if(type==="slime"){ctx.fillStyle="#23583e";ctx.beginPath();ctx.ellipse(0,3,19,15,0,Math.PI,Math.PI*2);ctx.lineTo(18,8);ctx.quadraticCurveTo(0,28,-18,8);ctx.fill();ctx.fillStyle="#71d18a";ctx.beginPath();ctx.ellipse(0,1,16,12,0,Math.PI,Math.PI*2);ctx.lineTo(16,8);ctx.quadraticCurveTo(0,23,-16,8);ctx.fill();ctx.fillStyle="#193c2b";ctx.fillRect(-7,4,3,4);ctx.fillRect(5,4,3,4);label("Slime Verde",0,-25,"#c6f2ce");}
-else{ctx.fillStyle=type==="player"?"#31577b":"#7b633a";ctx.beginPath();ctx.roundRect(-11,-15,22,28,6);ctx.fill();ctx.fillStyle=type==="player"?"#668db5":"#c39b54";ctx.fillRect(-10,-13,20,8);ctx.fillStyle="#d9b48d";ctx.beginPath();ctx.arc(0,-23,9,0,Math.PI*2);ctx.fill();ctx.fillStyle="#514233";ctx.beginPath();ctx.arc(0,-27,10,Math.PI,Math.PI*2);ctx.fill();ctx.fillStyle="#d7dce1";ctx.fillRect(-12,0,8,15);ctx.fillRect(4,0,8,15);ctx.fillStyle="#aab9c6";ctx.fillRect(-9,12,7,5);ctx.fillRect(3,12,7,5);
-if(type==="player"){ctx.strokeStyle="#d8dbe0";ctx.lineWidth=3;ctx.beginPath();ctx.moveTo(12,-12);ctx.lineTo(21,-31);ctx.stroke();ctx.fillStyle="#d6bd83";ctx.fillRect(-14,-18,28,3);label("Viajante",0,-43);}
-else{ctx.fillStyle="#f1d28a";ctx.fillRect(-13,-35,26,3);label("Guardião",0,-45,"#ffe0a0");}}
-ctx.restore();}
-function draw(t){ctx.clearRect(0,0,canvas.width,canvas.height);ctx.save();ctx.translate(-camera.x,-camera.y);drawWorld(t);actor(guardian.x,guardian.y,"guardian",t);actor(slime.x,slime.y,"slime",t);actor(player.x,player.y,"player",t);
+function actor(x,y,type,t){
+ if(type==="player"&&heroSprite.complete&&heroSprite.naturalWidth){
+   const moving=Math.hypot(player.tx-player.x,player.ty-player.y)>3;
+   const frame=moving?Math.floor(t/115)%4:0;
+   ctx.drawImage(heroSprite,frame*64,0,64,80,x-32,y-60,64,80);
+   label("Viajante",x,y-66);
+   return;
+ }
+ if(type==="slime"&&slimeSprite.complete&&slimeSprite.naturalWidth){
+   const frame=Math.floor(t/260)%3;
+   ctx.drawImage(slimeSprite,frame*64,0,64,64,x-32,y-36,64,64);
+   label("Slime Verde",x,y-42,"#c6f2ce");
+   return;
+ }
+ ctx.save();ctx.translate(x,y);const bob=Math.sin(t/210)*1.5;ctx.translate(0,bob);
+ ctx.fillStyle="#17251d88";ctx.beginPath();ctx.ellipse(0,14,18,8,0,0,Math.PI*2);ctx.fill();
+ ctx.fillStyle="#87683f";ctx.beginPath();ctx.roundRect(-12,-16,24,30,6);ctx.fill();
+ ctx.fillStyle="#c69c58";ctx.fillRect(-11,-14,22,8);
+ ctx.fillStyle="#dfbd91";ctx.beginPath();ctx.arc(0,-25,9,0,Math.PI*2);ctx.fill();
+ ctx.fillStyle="#514233";ctx.beginPath();ctx.arc(0,-29,10,Math.PI,Math.PI*2);ctx.fill();
+ ctx.strokeStyle="#e4d5b5";ctx.lineWidth=3;ctx.beginPath();ctx.moveTo(12,-10);ctx.lineTo(20,-30);ctx.stroke();
+ label("Guardião",0,-45,"#ffe0a0");ctx.restore();
+}
+function spawnMagic(x,y){
+ const sx=player.x,sy=player.y-24,dx=x-sx,dy=y-sy;
+ effects.push({kind:"bolt",x:sx,y:sy,tx:x,ty:y,life:0,duration:420});
+ for(let i=0;i<18;i++)effects.push({kind:"spark",x,y,vx:(rand(i+performance.now())-.5)*2.8,vy:(rand(i+80+performance.now())-.5)*2.8,life:0,duration:650});
+ notice.innerHTML="<b>[MAGIA]</b> Um pulso arcano ilumina a criatura. Efeito demonstrativo; combate ainda em desenvolvimento.";
+}
+function drawEffects(dt,t){
+ for(let i=effects.length-1;i>=0;i--){
+  const e=effects[i];e.life+=dt;
+  const p=Math.min(1,e.life/e.duration);
+  if(e.kind==="bolt"){
+   const x=e.x+(e.tx-e.x)*p,y=e.y+(e.ty-e.y)*p;
+   ctx.save();ctx.globalCompositeOperation="lighter";ctx.strokeStyle="#8de8ff";ctx.shadowColor="#58cfff";ctx.shadowBlur=18;ctx.lineWidth=5*(1-p)+1;
+   ctx.beginPath();ctx.moveTo(e.x,e.y);ctx.lineTo(x,y);ctx.stroke();
+   ctx.fillStyle="#e8ffff";ctx.beginPath();ctx.arc(x,y,5+Math.sin(t/25)*2,0,Math.PI*2);ctx.fill();ctx.restore();
+  }else{
+   e.x+=e.vx;e.y+=e.vy;e.vy+=.025;
+   ctx.save();ctx.globalCompositeOperation="lighter";ctx.globalAlpha=1-p;ctx.fillStyle=i%2?"#a6f4ff":"#b69cff";ctx.shadowColor=ctx.fillStyle;ctx.shadowBlur=10;
+   ctx.beginPath();ctx.arc(e.x,e.y,2+3*(1-p),0,Math.PI*2);ctx.fill();ctx.restore();
+  }
+  if(p>=1)effects.splice(i,1);
+ }
+}
+function draw(t){ctx.clearRect(0,0,canvas.width,canvas.height);ctx.save();ctx.translate(-camera.x,-camera.y);drawWorld(t);actor(guardian.x,guardian.y,"guardian",t);actor(slime.x,slime.y,"slime",t);actor(player.x,player.y,"player",t);drawEffects(16,t);
 ctx.strokeStyle="#f7df9b99";ctx.lineWidth=2;ctx.setLineDash([7,8]);ctx.beginPath();ctx.moveTo(player.x,player.y);ctx.lineTo(player.tx,player.ty);ctx.stroke();ctx.setLineDash([]);
 ctx.fillStyle="#f8dda0";ctx.beginPath();ctx.arc(player.tx,player.ty,6+Math.sin(t/100)*2,0,Math.PI*2);ctx.fill();ctx.restore();}
 function frame(t){const dt=Math.min((t-(frame.last||t))/1000,.04);frame.last=t;const dx=player.tx-player.x,dy=player.ty-player.y,d=Math.hypot(dx,dy);if(d>2){const step=Math.min(d,190*dt);player.x+=dx/d*step;player.y+=dy/d*step;player.step+=dt*9;}camera.x=Math.max(0,Math.min(W-canvas.width,player.x-canvas.width/2));camera.y=Math.max(0,Math.min(H-canvas.height,player.y-canvas.height/2));coords.textContent="X: "+Math.round(player.x)+" · Y: "+Math.round(player.y);draw(t);requestAnimationFrame(frame);}
 function point(e){const r=canvas.getBoundingClientRect();return{x:(e.clientX-r.left)*canvas.width/r.width+camera.x,y:(e.clientY-r.top)*canvas.height/r.height+camera.y};}
-canvas.addEventListener("click",e=>{const p=point(e);if(Math.hypot(p.x-guardian.x,p.y-guardian.y)<48){notice.innerHTML="<b>[GUARDIÃO]</b> Que a luz antiga proteja seus passos, viajante.";return;}if(Math.hypot(p.x-slime.x,p.y-slime.y)<48){notice.innerHTML="<b>[CRIATURA]</b> O Slime Verde observa você. O combate chegará em breve.";return;}player.tx=Math.max(24,Math.min(W-24,p.x));player.ty=Math.max(24,Math.min(H-24,p.y));notice.innerHTML="<b>[MUNDO]</b> Você segue em direção ao destino marcado.";});
+canvas.addEventListener("click",e=>{const p=point(e);if(Math.hypot(p.x-guardian.x,p.y-guardian.y)<48){notice.innerHTML="<b>[GUARDIÃO]</b> Que a luz antiga proteja seus passos, viajante.";return;}if(Math.hypot(p.x-slime.x,p.y-slime.y)<48){spawnMagic(slime.x,slime.y-8);return;}player.tx=Math.max(24,Math.min(W-24,p.x));player.ty=Math.max(24,Math.min(H-24,p.y));notice.innerHTML="<b>[MUNDO]</b> Você segue em direção ao destino marcado.";});
 function center(){player.tx=player.x;player.ty=player.y;notice.innerHTML="<b>[SISTEMA]</b> Personagem centralizado.";}
 function help(){notice.innerHTML="<b>[AJUDA]</b> Clique no terreno para caminhar. Clique no Guardião ou no Slime para interagir.";}
 document.querySelector("#center").addEventListener("click",center);document.querySelector("#center-side").addEventListener("click",center);document.querySelector("#help").addEventListener("click",help);document.querySelector("#quest-help").addEventListener("click",help);window.addEventListener("keydown",e=>{if(e.key.toLowerCase()==="h")help();});
