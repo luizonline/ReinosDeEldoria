@@ -22,7 +22,7 @@
       <aside class="panel character-panel">
         <div class="panel-heading"><span>PERSONAGEM</span><span class="tiny-gem">◆</span></div>
         <div class="portrait-wrap"><div class="portrait-ring"><div class="portrait">♞</div></div><span class="level-badge">1</span></div>
-        <h1>Viajante</h1><p class="class-label">GUERREIRO NOVATO</p>
+        <h1>Viajante</h1><p class="class-label" id="class-name">SOLDADO · NÍVEL 1</p><div class="class-picker-title">ESCOLHA SUA CLASSE</div><div class="class-picker" id="class-picker"><button class="class-choice selected" data-class="soldier"><span>🛡</span><b>Soldado</b></button><button class="class-choice" data-class="assassin"><span>🗡</span><b>Assassino</b></button><button class="class-choice" data-class="mage"><span>✦</span><b>Mago</b></button><button class="class-choice" data-class="priest"><span>✚</span><b>Clérigo</b></button><button class="class-choice" data-class="longbowman"><span>➶</span><b>Arqueiro</b></button><button class="class-choice" data-class="cavalry"><span>♞</span><b>Cavalaria</b></button></div>
         <div class="xp-line"><span>EXPERIÊNCIA</span><b>0 / 100</b></div><div class="xp-track"><i></i></div>
         <div class="stat-block"><div class="stat-label"><span>♥ VIDA</span><b>100 <small>/ 100</small></b></div><div class="meter hp"><i></i></div></div>
         <div class="stat-block"><div class="stat-label"><span>✧ MANA</span><b>40 <small>/ 40</small></b></div><div class="meter mp"><i></i></div></div>
@@ -43,7 +43,7 @@
         </div>
         <div class="game-bottom">
           <div class="chat-panel"><div class="chat-tabs"><b>GERAL</b><span>COMBATE</span><span>SISTEMA</span><i>● Conectividade local</i></div><div class="chat-message" id="notice"><b>[MUNDO]</b> Bem-vindo a Eldoria, viajante. Sua jornada começa agora.</div></div>
-          <div class="action-panel"><div class="action-slot active">Ⅰ</div><div class="action-slot">Ⅱ</div><div class="action-slot">Ⅲ</div><div class="action-slot">Ⅳ</div><div class="action-slot">Ⅴ</div><div class="action-slot">Ⅵ</div><button id="center" class="center-button" title="Centralizar personagem">◎</button></div>
+          <div class="action-panel"><button class="action-slot active" id="attack" title="Atacar (Espaço)">⚔</button><div class="action-slot">Ⅱ</div><div class="action-slot">Ⅲ</div><div class="action-slot">Ⅳ</div><div class="action-slot">Ⅴ</div><div class="action-slot">Ⅵ</div><button id="center" class="center-button" title="Centralizar personagem">◎</button></div>
         </div>
       </section>
 
@@ -58,7 +58,7 @@
         <button class="menu-button" id="quest-help"><span>✧</span> Como jogar <kbd>H</kbd></button>
         <button class="menu-button" id="center-side"><span>⌖</span> Centralizar personagem</button>
         <div class="world-card"><div class="weather">☀</div><div><b>Tempo agradável</b><small>Brisa suave · 22°C</small></div></div>
-        <div class="build-label">MAPA PIXEL ART · 0.3</div>
+        <div class="build-label">CLASSES E COMBATE · 0.4</div>
       </aside>
     </main>
   </div>
