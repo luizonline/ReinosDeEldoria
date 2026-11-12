@@ -1,0 +1,11 @@
+{
+  "name": "eldoria-server",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": { "dev": "node src/index.js" },
+  "dependencies": {
+    "colyseus": "^0.16.5",
+    "@colyseus/ws-transport": "^0.16.4"
+  }
+}
