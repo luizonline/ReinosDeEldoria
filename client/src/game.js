@@ -10,6 +10,23 @@ heroSprite.src="assets/sprites/player-walk.svg";slimeSprite.src="assets/sprites/
 const effects=[];
 const classData={soldier:{name:"Soldado",hp:130,mp:35,damage:14,speed:185,color:"#547c9b",accent:"#c5d5dc",weapon:"sword"},assassin:{name:"Assassino",hp:85,mp:45,damage:19,speed:235,color:"#294d87",accent:"#51c9d5",weapon:"dagger"},mage:{name:"Mago",hp:75,mp:110,damage:24,speed:175,color:"#9b3041",accent:"#c69aff",weapon:"staff"},priest:{name:"Clérigo",hp:100,mp:100,damage:13,speed:180,color:"#d5d8d0",accent:"#c84e55",weapon:"staff"},longbowman:{name:"Arqueiro",hp:90,mp:55,damage:17,speed:205,color:"#8a7047",accent:"#c5a66a",weapon:"bow"},cavalry:{name:"Cavalaria",hp:145,mp:40,damage:17,speed:195,color:"#456f85",accent:"#d6dbe0",weapon:"lance"}};
 let chosenClass="soldier",attackState=0,attackCooldown=0,combatTarget=null,playerHp=130,playerMp=35,playerXp=0,monsterHp=60,monsterAlive=true;
+const spriteSheetConfig={frameWidth:64,frameHeight:64,framesPerRow:6,actions:["idle","walk","run","attack"],directions:["down","left","right","up"],files:{assassin:"assets/classes/assassin.png",mage:"assets/classes/mage.png",priest:"assets/classes/priest.png",longbowman:"assets/classes/longbowman.png",cavalry:"assets/classes/cavalry.png",soldier:"assets/classes/soldier.png"}};
+const classSpriteSheets={};
+for(const [key,src] of Object.entries(spriteSheetConfig.files)){const img=new Image();img.onload=()=>{classSpriteSheets[key]=img;};img.onerror=()=>{};img.src=src;}
+function drawClassSpriteSheet(x,y,t){
+ const img=classSpriteSheets[chosenClass];if(!img)return false;
+ const dx=player.tx-player.x,dy=player.ty-player.y,moving=Math.hypot(dx,dy)>3;
+ const dir=Math.abs(dx)>Math.abs(dy)?(dx>=0?"right":"left"):(dy>=0?"down":"up");
+ const action=attackState>0?"attack":moving?"run":"idle";
+ const actionIndex=spriteSheetConfig.actions.indexOf(action),dirIndex=spriteSheetConfig.directions.indexOf(dir);
+ const frameCount=action==="idle"?4:action==="attack"?6:6;
+ const frame=action==="idle"?Math.floor(t/260)%frameCount:Math.floor(t/(action==="attack"?65:105))%frameCount;
+ const sx=frame*spriteSheetConfig.frameWidth,sy=(actionIndex*4+dirIndex)*spriteSheetConfig.frameHeight;
+ if(sx+64>img.width||sy+64>img.height)return false;
+ ctx.drawImage(img,sx,sy,64,64,x-24,y-53,48,60);
+ return true;
+}
+
 const rand=n=>{const v=Math.sin(n*127.1+311.7)*43758.5453;return v-Math.floor(v)};
 const pathPoints=[[0,570],[250,560],[440,610],[650,570],[850,660],[1040,740],[1240,730],[1440,770],[1660,720],[1840,810],[2030,850],[2400,900]];
 function segDistance(px,py,a,b){const dx=b[0]-a[0],dy=b[1]-a[1],l=dx*dx+dy*dy;const t=Math.max(0,Math.min(1,((px-a[0])*dx+(py-a[1])*dy)/(l||1)));return Math.hypot(px-a[0]-t*dx,py-a[1]-t*dy);}
