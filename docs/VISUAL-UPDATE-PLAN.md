@@ -65,3 +65,11 @@ Evoluir o protótipo para um MMORPG 2D de fantasia medieval com apresentação v
 - Recursos atuais: SVGs em `client/assets/classes` e `client/assets/sprites`.
 - A implementação atual mistura renderização, lógica de jogo e interface; a separação será incremental para reduzir risco.
 - Os sprites de classe existentes são grandes SVGs; é necessário validar suas dimensões e organização de quadros antes de tratá-los como spritesheets finais.
+
+
+## Prévia Cloudflare Pages
+- Projeto conectado ao repositório `luizonline/ReinosDeEldoria`.
+- Branch de produção: `main`.
+- Pré-visualizações automáticas: todas as branches não principais.
+- A branch `update/realistic-topdown-complete` deve publicar uma URL própria de preview; validar o status e a URL em Workers & Pages → projeto → Deployments.
+- Não mesclar o PR nem alterar `main` antes da aprovação visual.
