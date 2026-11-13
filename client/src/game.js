@@ -50,7 +50,16 @@ function drawGround(c){
  // Water and bank
  c.fillStyle="#335f50";c.beginPath();c.moveTo(1680,0);c.bezierCurveTo(1570,180,1770,290,1680,450);c.bezierCurveTo(1600,610,1780,650,1710,850);c.lineTo(1930,860);c.bezierCurveTo(1880,640,1800,520,1900,360);c.bezierCurveTo(1980,190,1840,100,1900,0);c.closePath();c.fill();
  c.fillStyle="#478b9a";c.beginPath();c.moveTo(1695,0);c.bezierCurveTo(1600,180,1790,290,1700,450);c.bezierCurveTo(1630,600,1800,660,1730,830);c.lineTo(1890,830);c.bezierCurveTo(1840,640,1770,510,1870,350);c.bezierCurveTo(1940,190,1810,100,1870,0);c.closePath();c.fill();
- for(let i=0;i<60;i++){const x=1700+rand(i+22)*180,y=rand(i+400)*810;c.fillStyle="#a4d7c5";c.globalAlpha=.12+rand(i+900)*.15;c.fillRect(x,y,10+rand(i)*18,2);c.globalAlpha=1;}
+ // Reflexos, espuma e vegetação nas margens
+ for(let i=0;i<60;i++){const x=1700+rand(i+22)*180,y=rand(i+400)*810;c.fillStyle="#bce8db";c.globalAlpha=.12+rand(i+900)*.15;c.fillRect(x,y,10+rand(i)*18,2);c.globalAlpha=1;}
+ for(let i=0;i<48;i++){
+  const side=i%2?1685:1900, y=rand(i+720)*820, x=side+Math.sin(y/105)*35;
+  c.save();c.translate(x,y);c.rotate((rand(i+88)-.5)*.7);
+  c.strokeStyle=i%3?"#527b48":"#799454";c.lineWidth=2;c.beginPath();c.moveTo(0,8);c.quadraticCurveTo(-4,-2,-2,-13-rand(i+5)*9);c.moveTo(0,8);c.quadraticCurveTo(5,-1,7,-10-rand(i+8)*10);c.stroke();
+  c.restore();
+ }
+ // Pedras e pequenas manchas úmidas na margem
+ for(let i=0;i<38;i++){const x=1680+rand(i+100)*230,y=rand(i+300)*840;c.fillStyle=i%2?"#8d9278":"#a6a38a";c.globalAlpha=.35;c.beginPath();c.ellipse(x,y,3+rand(i)*5,2+rand(i+7)*3,rand(i+9),0,Math.PI*2);c.fill();c.globalAlpha=1;}
  // Cliff wall on eastern edge
  for(let y=120;y<1500;y+=48){const x=2100+Math.sin(y/130)*70;c.fillStyle="#61412f";c.fillRect(x,y,300,50);c.fillStyle="#805337";c.fillRect(x+8,y+5,292,38);c.fillStyle="#a06a43";c.fillRect(x+5,y+4,290,5);for(let k=0;k<5;k++){c.fillStyle="#563b2c";c.fillRect(x+20+k*45,y+20+rand(y+k)*18,18,5);}}
 }
@@ -265,7 +274,7 @@ function awardExperience(amount){playerXp+=amount;let gained=0;while(playerXp>=x
 function dropLoot(target){gold+=target.kind==="slime"?3:target.kind==="wolf"?6:8;if(Math.random()<.14&&target.kind!=="slime"&&bag.length<24){const gear=target.kind==="wolf"?{id:"wolf-blade-"+Date.now(),name:"Lâmina do Caçador",kind:"weapon",attack:7,icon:"⚔"}:{id:"bone-armor-"+Date.now(),name:"Couraça Óssea",kind:"armor",defense:5,icon:"🛡"};bag.push(gear);notice.innerHTML+=" <b>[EQUIPAMENTO RARO]</b> "+gear.name+"!";}else if(Math.random()<.55&&bag.length<24){bag.push({id:"potion-"+Date.now(),name:"Poção de Vida",kind:"consumable",icon:"🧪"});notice.innerHTML+=" <b>[DROP]</b> Você encontrou uma Poção de Vida!";}else if(bag.length<24){const name=target.kind==="wolf"?"Presa de Lobo":target.kind==="skeleton"?"Osso Antigo":"Gosma Verde";bag.push({id:"material-"+Date.now(),name,kind:"material",icon:target.kind==="wolf"?"🦷":target.kind==="skeleton"?"🦴":"🟢"});notice.innerHTML+=" <b>[DROP]</b> Item obtido: "+name+".";}else notice.innerHTML+=" <b>[DROP]</b> Mochila cheia. Ouro recebido: "+(target.kind==="slime"?3:target.kind==="wolf"?6:8)+".";renderInventory();renderShop();saveGame();}
 function updateQuestUI(){const a=document.querySelector("#quest-guardian"),b=document.querySelector("#quest-slimes"),c=document.querySelector("#quest-wolf"),d=document.querySelector("#quest-skeleton"),status=document.querySelector("#quest-status");if(a)a.textContent=questState.guardian?"1/1":"0/1";if(b)b.textContent=Math.min(3,questState.slimes)+"/3";if(c)c.textContent=questState.wolf?"1/1":"0/1";if(d)d.textContent=questState.skeleton?"1/1":"0/1";if(status)status.textContent=questState.claimed?"Jornada concluída · Recompensa recebida": "Recompensa: 100 ouro + 100 EXP";}
 function progressQuest(target){if(target.id==="slime")questState.slimes=Math.min(3,questState.slimes+1);if(target.id==="wolf")questState.wolf=true;if(target.id==="skeleton")questState.skeleton=true;updateQuestUI();saveGame();if(questState.guardian&&questState.slimes>=3&&questState.wolf&&questState.skeleton&&!questState.claimed){questState.claimed=true;gold+=100;awardExperience(100);notice.innerHTML="<b>[MISSÃO CONCLUÍDA]</b> Primeiros passos: +100 ouro e +100 EXP!";updateQuestUI();saveGame();}}
-function resolveHit(damage,target=activeMonster){if(!target||!target.alive)return;target.hp=Math.max(0,target.hp-damage);if(target.id==="slime"){monsterHp=target.hp;monsterAlive=target.alive;}effects.push({kind:"ring",x:target.x,y:target.y-10,life:0,duration:360},{kind:"number",x:target.x,y:target.y-35,text:"-"+damage,life:0,duration:850});for(let i=0;i<10;i++)effects.push({kind:"spark",x:target.x,y:target.y-8,vx:(rand(i+performance.now())-.5)*3,vy:(rand(i+90+performance.now())-.5)*3,life:0,duration:500});if(target.hp<=0){target.alive=false;target.respawn=18;combatTarget=null;notice.innerHTML="<b>[COMBATE]</b> "+target.name+" derrotado! +"+target.xp+" EXP.";awardExperience(target.xp);progressQuest(target);dropLoot(target);saveGame();}else notice.innerHTML="<b>[COMBATE]</b> Dano em "+target.name+": "+target.hp+"/"+target.maxHp+".";}
+function resolveHit(damage,target=activeMonster){if(!target||!target.alive)return;target.hp=Math.max(0,target.hp-damage);if(target.id==="slime"){monsterHp=target.hp;monsterAlive=target.alive;}effects.push({kind:"ring",x:target.x,y:target.y-10,life:0,duration:360},{kind:"number",x:target.x,y:target.y-35,text:"-"+damage,life:0,duration:850});for(let i=0;i<10;i++)effects.push({kind:"spark",x:target.x,y:target.y-8,vx:(rand(i+performance.now())-.5)*3,vy:(rand(i+90+performance.now())-.5)*3,life:0,duration:500});if(target.hp<=0){effects.push({kind:"death",x:target.x,y:target.y-12,rotation:rand(target.x+target.y),color:target.kind==="slime"?"#9fffc0":target.kind==="wolf"?"#c1d6e8":"#e6d6b1",life:0,duration:850});for(let n=0;n<18;n++)effects.push({kind:"spark",x:target.x,y:target.y-10,vx:(rand(n+target.x)-.5)*4,vy:(rand(n+target.y+30)-.5)*4,life:0,duration:650,color:target.kind==="slime"?"#9fffc0":"#e6d6b1"});target.alive=false;target.respawn=18;combatTarget=null;notice.innerHTML="<b>[COMBATE]</b> "+target.name+" derrotado! +"+target.xp+" EXP.";awardExperience(target.xp);progressQuest(target);dropLoot(target);saveGame();}else notice.innerHTML="<b>[COMBATE]</b> Dano em "+target.name+": "+target.hp+"/"+target.maxHp+".";}
 function fireProjectile(style,damage,target=activeMonster){if(!target||!target.alive)return;const dx=target.x-player.x,dy=target.y-player.y,len=Math.max(1,Math.hypot(dx,dy)),speed=style==="arrow"?570:style==="holy"?390:330;projectiles.push({style,x:player.x,y:player.y-24,tx:target.x,ty:target.y-10,vx:dx/len,vy:dy/len,speed,damage,life:0,maxLife:len/speed,target});}
 function drawProjectiles(dt){
  for(let i=projectiles.length-1;i>=0;i--){
@@ -300,6 +309,11 @@ function drawEffects(dt,t){
    ctx.globalCompositeOperation="lighter";ctx.globalAlpha=fade;const col=e.kind==="ring"?"#b8ffd0":"#fff0bd";ctx.strokeStyle=col;ctx.shadowColor=col;ctx.shadowBlur=18;ctx.lineWidth=e.kind==="ring"?4*(1-p)+1:6*(1-p)+1;ctx.beginPath();
    if(e.kind==="ring"){ctx.ellipse(e.x,e.y,8+p*38,5+p*17,0,0,Math.PI*2);ctx.stroke();ctx.beginPath();ctx.arc(e.x,e.y-8,5+p*26,Math.PI*.08,Math.PI*.92);ctx.stroke();}
    else{ctx.arc(e.x,e.y,17+p*30,-1.25,1.1);ctx.stroke();ctx.beginPath();ctx.arc(e.x,e.y,22+p*25,-1.2,1.05);ctx.stroke();}
+  }else if(e.kind==="death"){
+   ctx.globalCompositeOperation="lighter";ctx.globalAlpha=fade;const radius=8+p*42;
+   const col=e.color||"#d8c08a";ctx.strokeStyle=col;ctx.shadowColor=col;ctx.shadowBlur=18;ctx.lineWidth=3*(1-p)+.5;
+   ctx.beginPath();ctx.arc(e.x,e.y,radius,0,Math.PI*2);ctx.stroke();
+   for(let n=0;n<12;n++){const ang=n*Math.PI/6+e.rotation;const rr=radius*(.55+.35*Math.sin(n*3+p*8));ctx.fillStyle=col;ctx.beginPath();ctx.arc(e.x+Math.cos(ang)*rr,e.y+Math.sin(ang)*rr,2.5*fade,0,Math.PI*2);ctx.fill();}
   }else if(e.kind==="bolt"){
    ctx.globalCompositeOperation="lighter";ctx.globalAlpha=fade;const ex=e.x+(e.tx-e.x)*p,ey=e.y+(e.ty-e.y)*p;ctx.strokeStyle="#91eaff";ctx.shadowColor="#58cfff";ctx.shadowBlur=18;ctx.lineWidth=5*(1-p)+1;ctx.beginPath();ctx.moveTo(e.x,e.y);ctx.lineTo(ex,ey);ctx.stroke();
    ctx.fillStyle="#e8ffff";ctx.beginPath();ctx.arc(ex,ey,4+fade*4,0,Math.PI*2);ctx.fill();
@@ -311,9 +325,14 @@ function drawEffects(dt,t){
 }
 const ambientMotes=Array.from({length:52},(_,i)=>({x:rand(i+500)*W,y:rand(i+900)*H,phase:rand(i+1300)*Math.PI*2,size:1+rand(i+1700)*2}));
 function drawAtmosphere(t){
- // Animated river glints
+ // Reflexos móveis e cintilação sobre o rio
  ctx.save();ctx.globalCompositeOperation="screen";
- for(let i=0;i<34;i++){const x=1710+rand(i+33)*165,y=(rand(i+89)*810+t*.012*(i%3+1))%810;ctx.globalAlpha=.12+.12*Math.sin(t/500+i);ctx.fillStyle="#b5e8e4";ctx.fillRect(x,y,8+rand(i+200)*15,2);}
+ for(let i=0;i<52;i++){
+  const x=1700+rand(i+33)*185,y=(rand(i+89)*850+t*.018*(i%3+1))%850;
+  ctx.globalAlpha=.1+.2*(.5+.5*Math.sin(t/390+i));ctx.fillStyle=i%4?"#b5e8e4":"#efffe2";
+  ctx.fillRect(x+Math.sin(t/850+i)*5,y,7+rand(i+200)*19,1.5+rand(i+20)*1.5);
+ }
+ // Pequenas luzes de vaga-lumes em movimento lento
  // Floating pollen and fireflies
  for(const m of ambientMotes){const x=m.x+Math.sin(t/1700+m.phase)*12,y=(m.y-t*(.006+m.size*.002)+H*2)%(H);const glow=.25+.35*(.5+.5*Math.sin(t/420+m.phase));ctx.globalAlpha=glow;ctx.fillStyle=m.size>2?"#f4d88b":"#d9edb0";ctx.shadowColor=ctx.fillStyle;ctx.shadowBlur=8;ctx.fillRect(x,y,m.size,m.size);}
  ctx.restore();ctx.globalAlpha=1;ctx.shadowBlur=0;
