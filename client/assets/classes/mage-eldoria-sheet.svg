@@ -1,0 +1,217 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1024" height="144" viewBox="0 0 1024 144" shape-rendering="crispEdges"><g transform="translate(0,0)">
+ <ellipse cx="64" cy="133" rx="32" ry="7" fill="#07100d" opacity=".48"/>
+ <!-- legs articulated -->
+ <g transform="translate(53 107) rotate(-17)"><path d="M-7 0 L8 0 L10 22 L6 29 L-12 27 L-12 20Z" fill="#54258a" stroke="#1a1028" stroke-width="4"/><path d="M-12 22 L8 22 L8 30 L-14 30Z" fill="#33213e" stroke="#d6a84f" stroke-width="2"/></g>
+ <g transform="translate(75 107) rotate(17)"><path d="M-7 0 L8 0 L10 22 L6 29 L-12 27 L-12 20Z" fill="#40205f" stroke="#1a1028" stroke-width="4"/><path d="M-12 22 L8 22 L8 30 L-14 30Z" fill="#33213e" stroke="#d6a84f" stroke-width="2"/></g>
+ <!-- robe torso -->
+ <path d="M43 52 L84 52 L96 111 L82 126 L31 126 L19 111Z" fill="#241238" stroke="#130c20" stroke-width="5"/>
+ <path d="M45 55 L80 55 L87 108 L75 120 L34 120 L28 108Z" fill="#6b2da2" stroke="#d5a34b" stroke-width="3"/>
+ <path d="M62 61 L68 61 L70 116 L61 116Z" fill="#e5bd65"/><path d="M52 91 L64 82 L77 92 L72 106 L63 113 L53 105Z" fill="#32154f" stroke="#e6c16e" stroke-width="3"/>
+ <!-- arm with sleeve -->
+ <g transform="translate(39 65) rotate(13)"><path d="M-5 -3 L-18 5 L-21 29 L-10 36 L1 15Z" fill="#522080" stroke="#1a1026" stroke-width="4"/><path d="M-20 27 L-9 31 L-7 40 L-19 39Z" fill="#d8aa50"/><path d="M-18 37 Q-10 33 -5 40 L-5 48 L-17 49Z" fill="#d8aa87" stroke="#553328" stroke-width="2"/></g>
+ <g transform="translate(82 64) rotate(-5.8500000000000005)"><path d="M2 -2 L17 5 L19 28 L8 35 L-1 15Z" fill="#7834ad" stroke="#1a1026" stroke-width="4"/><path d="M8 27 L19 25 L23 34 L12 39Z" fill="#d8aa50"/><path d="M12 37 Q20 33 25 40 L24 49 L13 49Z" fill="#d8aa87" stroke="#553328" stroke-width="2"/></g>
+ <!-- face, beard and hood -->
+ <path d="M45 28 Q48 7 65 8 Q84 9 85 31 L81 52 L70 62 L51 56 L42 43Z" fill="#d6a77c" stroke="#21162b" stroke-width="4"/>
+ <path d="M46 43 Q56 49 64 43 Q75 49 83 40 L80 56 L67 72 L51 61Z" fill="#f0e8d9" stroke="#a89b8d" stroke-width="3"/>
+ <path d="M46 29 Q39 10 57 4 Q80 -3 91 17 L86 34 Q64 39 46 29Z" fill="#602493" stroke="#180e29" stroke-width="4"/>
+ <path d="M24 31 Q51 19 105 31 Q92 43 64 40 Q38 41 24 31Z" fill="#2c1546" stroke="#160d22" stroke-width="4"/>
+ <path d="M27 30 Q62 40 102 30" fill="none" stroke="#e6bd69" stroke-width="5"/>
+ <path d="M54 28 L64 23 L74 29 L64 35Z" fill="#f6d98b"/>
+ <!-- staff arm and staff, animated casting -->
+ <g transform="translate(96 66) rotate(8)">
+  <path d="M0 0 L-4 67" stroke="#39241c" stroke-width="7"/><path d="M0 0 L-4 67" stroke="#c08b45" stroke-width="2.5"/>
+  <path d="M-9 -7 Q-18 -24 -2 -33 Q13 -39 18 -23 Q21 -9 5 -3" fill="none" stroke="#e3b95f" stroke-width="4"/>
+  <circle cx="4" cy="-20" r="12" fill="#a33dff" opacity=".35"/>
+  <circle cx="4" cy="-20" r="8" fill="#b95cff" stroke="#f1d5ff" stroke-width="2"/>
+ </g>
+ <path d="M9 28 l4 -7 4 7 -4 7Z" fill="#e8c5ff" opacity=".9"/>
+ </g><g transform="translate(128,0)">
+ <ellipse cx="64" cy="133" rx="32" ry="7" fill="#07100d" opacity=".48"/>
+ <!-- legs articulated -->
+ <g transform="translate(53 107) rotate(0)"><path d="M-7 0 L8 0 L10 22 L6 29 L-12 27 L-12 20Z" fill="#54258a" stroke="#1a1028" stroke-width="4"/><path d="M-12 22 L8 22 L8 30 L-14 30Z" fill="#33213e" stroke="#d6a84f" stroke-width="2"/></g>
+ <g transform="translate(75 107) rotate(0)"><path d="M-7 0 L8 0 L10 22 L6 29 L-12 27 L-12 20Z" fill="#40205f" stroke="#1a1028" stroke-width="4"/><path d="M-12 22 L8 22 L8 30 L-14 30Z" fill="#33213e" stroke="#d6a84f" stroke-width="2"/></g>
+ <!-- robe torso -->
+ <path d="M43 52 L84 52 L96 111 L82 126 L31 126 L19 111Z" fill="#241238" stroke="#130c20" stroke-width="5"/>
+ <path d="M45 55 L80 55 L87 108 L75 120 L34 120 L28 108Z" fill="#6b2da2" stroke="#d5a34b" stroke-width="3"/>
+ <path d="M62 61 L68 61 L70 116 L61 116Z" fill="#e5bd65"/><path d="M52 91 L64 82 L77 92 L72 106 L63 113 L53 105Z" fill="#32154f" stroke="#e6c16e" stroke-width="3"/>
+ <!-- arm with sleeve -->
+ <g transform="translate(39 65) rotate(0)"><path d="M-5 -3 L-18 5 L-21 29 L-10 36 L1 15Z" fill="#522080" stroke="#1a1026" stroke-width="4"/><path d="M-20 27 L-9 31 L-7 40 L-19 39Z" fill="#d8aa50"/><path d="M-18 37 Q-10 33 -5 40 L-5 48 L-17 49Z" fill="#d8aa87" stroke="#553328" stroke-width="2"/></g>
+ <g transform="translate(82 64) rotate(0)"><path d="M2 -2 L17 5 L19 28 L8 35 L-1 15Z" fill="#7834ad" stroke="#1a1026" stroke-width="4"/><path d="M8 27 L19 25 L23 34 L12 39Z" fill="#d8aa50"/><path d="M12 37 Q20 33 25 40 L24 49 L13 49Z" fill="#d8aa87" stroke="#553328" stroke-width="2"/></g>
+ <!-- face, beard and hood -->
+ <path d="M45 28 Q48 7 65 8 Q84 9 85 31 L81 52 L70 62 L51 56 L42 43Z" fill="#d6a77c" stroke="#21162b" stroke-width="4"/>
+ <path d="M46 43 Q56 49 64 43 Q75 49 83 40 L80 56 L67 72 L51 61Z" fill="#f0e8d9" stroke="#a89b8d" stroke-width="3"/>
+ <path d="M46 29 Q39 10 57 4 Q80 -3 91 17 L86 34 Q64 39 46 29Z" fill="#602493" stroke="#180e29" stroke-width="4"/>
+ <path d="M24 31 Q51 19 105 31 Q92 43 64 40 Q38 41 24 31Z" fill="#2c1546" stroke="#160d22" stroke-width="4"/>
+ <path d="M27 30 Q62 40 102 30" fill="none" stroke="#e6bd69" stroke-width="5"/>
+ <path d="M54 28 L64 23 L74 29 L64 35Z" fill="#f6d98b"/>
+ <!-- staff arm and staff, animated casting -->
+ <g transform="translate(96 66) rotate(0)">
+  <path d="M0 0 L-4 67" stroke="#39241c" stroke-width="7"/><path d="M0 0 L-4 67" stroke="#c08b45" stroke-width="2.5"/>
+  <path d="M-9 -7 Q-18 -24 -2 -33 Q13 -39 18 -23 Q21 -9 5 -3" fill="none" stroke="#e3b95f" stroke-width="4"/>
+  <circle cx="4" cy="-20" r="12" fill="#a33dff" opacity=".35"/>
+  <circle cx="4" cy="-20" r="8" fill="#b95cff" stroke="#f1d5ff" stroke-width="2"/>
+ </g>
+ <path d="M9 28 l4 -7 4 7 -4 7Z" fill="#e8c5ff" opacity=".9"/>
+ </g><g transform="translate(256,0)">
+ <ellipse cx="64" cy="133" rx="32" ry="7" fill="#07100d" opacity=".48"/>
+ <!-- legs articulated -->
+ <g transform="translate(53 107) rotate(17)"><path d="M-7 0 L8 0 L10 22 L6 29 L-12 27 L-12 20Z" fill="#54258a" stroke="#1a1028" stroke-width="4"/><path d="M-12 22 L8 22 L8 30 L-14 30Z" fill="#33213e" stroke="#d6a84f" stroke-width="2"/></g>
+ <g transform="translate(75 107) rotate(-17)"><path d="M-7 0 L8 0 L10 22 L6 29 L-12 27 L-12 20Z" fill="#40205f" stroke="#1a1028" stroke-width="4"/><path d="M-12 22 L8 22 L8 30 L-14 30Z" fill="#33213e" stroke="#d6a84f" stroke-width="2"/></g>
+ <!-- robe torso -->
+ <path d="M43 52 L84 52 L96 111 L82 126 L31 126 L19 111Z" fill="#241238" stroke="#130c20" stroke-width="5"/>
+ <path d="M45 55 L80 55 L87 108 L75 120 L34 120 L28 108Z" fill="#6b2da2" stroke="#d5a34b" stroke-width="3"/>
+ <path d="M62 61 L68 61 L70 116 L61 116Z" fill="#e5bd65"/><path d="M52 91 L64 82 L77 92 L72 106 L63 113 L53 105Z" fill="#32154f" stroke="#e6c16e" stroke-width="3"/>
+ <!-- arm with sleeve -->
+ <g transform="translate(39 65) rotate(-13)"><path d="M-5 -3 L-18 5 L-21 29 L-10 36 L1 15Z" fill="#522080" stroke="#1a1026" stroke-width="4"/><path d="M-20 27 L-9 31 L-7 40 L-19 39Z" fill="#d8aa50"/><path d="M-18 37 Q-10 33 -5 40 L-5 48 L-17 49Z" fill="#d8aa87" stroke="#553328" stroke-width="2"/></g>
+ <g transform="translate(82 64) rotate(5.8500000000000005)"><path d="M2 -2 L17 5 L19 28 L8 35 L-1 15Z" fill="#7834ad" stroke="#1a1026" stroke-width="4"/><path d="M8 27 L19 25 L23 34 L12 39Z" fill="#d8aa50"/><path d="M12 37 Q20 33 25 40 L24 49 L13 49Z" fill="#d8aa87" stroke="#553328" stroke-width="2"/></g>
+ <!-- face, beard and hood -->
+ <path d="M45 28 Q48 7 65 8 Q84 9 85 31 L81 52 L70 62 L51 56 L42 43Z" fill="#d6a77c" stroke="#21162b" stroke-width="4"/>
+ <path d="M46 43 Q56 49 64 43 Q75 49 83 40 L80 56 L67 72 L51 61Z" fill="#f0e8d9" stroke="#a89b8d" stroke-width="3"/>
+ <path d="M46 29 Q39 10 57 4 Q80 -3 91 17 L86 34 Q64 39 46 29Z" fill="#602493" stroke="#180e29" stroke-width="4"/>
+ <path d="M24 31 Q51 19 105 31 Q92 43 64 40 Q38 41 24 31Z" fill="#2c1546" stroke="#160d22" stroke-width="4"/>
+ <path d="M27 30 Q62 40 102 30" fill="none" stroke="#e6bd69" stroke-width="5"/>
+ <path d="M54 28 L64 23 L74 29 L64 35Z" fill="#f6d98b"/>
+ <!-- staff arm and staff, animated casting -->
+ <g transform="translate(96 66) rotate(-8)">
+  <path d="M0 0 L-4 67" stroke="#39241c" stroke-width="7"/><path d="M0 0 L-4 67" stroke="#c08b45" stroke-width="2.5"/>
+  <path d="M-9 -7 Q-18 -24 -2 -33 Q13 -39 18 -23 Q21 -9 5 -3" fill="none" stroke="#e3b95f" stroke-width="4"/>
+  <circle cx="4" cy="-20" r="12" fill="#a33dff" opacity=".35"/>
+  <circle cx="4" cy="-20" r="8" fill="#b95cff" stroke="#f1d5ff" stroke-width="2"/>
+ </g>
+ <path d="M9 28 l4 -7 4 7 -4 7Z" fill="#e8c5ff" opacity=".9"/>
+ </g><g transform="translate(384,0)">
+ <ellipse cx="64" cy="133" rx="32" ry="7" fill="#07100d" opacity=".48"/>
+ <!-- legs articulated -->
+ <g transform="translate(53 107) rotate(0)"><path d="M-7 0 L8 0 L10 22 L6 29 L-12 27 L-12 20Z" fill="#54258a" stroke="#1a1028" stroke-width="4"/><path d="M-12 22 L8 22 L8 30 L-14 30Z" fill="#33213e" stroke="#d6a84f" stroke-width="2"/></g>
+ <g transform="translate(75 107) rotate(0)"><path d="M-7 0 L8 0 L10 22 L6 29 L-12 27 L-12 20Z" fill="#40205f" stroke="#1a1028" stroke-width="4"/><path d="M-12 22 L8 22 L8 30 L-14 30Z" fill="#33213e" stroke="#d6a84f" stroke-width="2"/></g>
+ <!-- robe torso -->
+ <path d="M43 52 L84 52 L96 111 L82 126 L31 126 L19 111Z" fill="#241238" stroke="#130c20" stroke-width="5"/>
+ <path d="M45 55 L80 55 L87 108 L75 120 L34 120 L28 108Z" fill="#6b2da2" stroke="#d5a34b" stroke-width="3"/>
+ <path d="M62 61 L68 61 L70 116 L61 116Z" fill="#e5bd65"/><path d="M52 91 L64 82 L77 92 L72 106 L63 113 L53 105Z" fill="#32154f" stroke="#e6c16e" stroke-width="3"/>
+ <!-- arm with sleeve -->
+ <g transform="translate(39 65) rotate(0)"><path d="M-5 -3 L-18 5 L-21 29 L-10 36 L1 15Z" fill="#522080" stroke="#1a1026" stroke-width="4"/><path d="M-20 27 L-9 31 L-7 40 L-19 39Z" fill="#d8aa50"/><path d="M-18 37 Q-10 33 -5 40 L-5 48 L-17 49Z" fill="#d8aa87" stroke="#553328" stroke-width="2"/></g>
+ <g transform="translate(82 64) rotate(0)"><path d="M2 -2 L17 5 L19 28 L8 35 L-1 15Z" fill="#7834ad" stroke="#1a1026" stroke-width="4"/><path d="M8 27 L19 25 L23 34 L12 39Z" fill="#d8aa50"/><path d="M12 37 Q20 33 25 40 L24 49 L13 49Z" fill="#d8aa87" stroke="#553328" stroke-width="2"/></g>
+ <!-- face, beard and hood -->
+ <path d="M45 28 Q48 7 65 8 Q84 9 85 31 L81 52 L70 62 L51 56 L42 43Z" fill="#d6a77c" stroke="#21162b" stroke-width="4"/>
+ <path d="M46 43 Q56 49 64 43 Q75 49 83 40 L80 56 L67 72 L51 61Z" fill="#f0e8d9" stroke="#a89b8d" stroke-width="3"/>
+ <path d="M46 29 Q39 10 57 4 Q80 -3 91 17 L86 34 Q64 39 46 29Z" fill="#602493" stroke="#180e29" stroke-width="4"/>
+ <path d="M24 31 Q51 19 105 31 Q92 43 64 40 Q38 41 24 31Z" fill="#2c1546" stroke="#160d22" stroke-width="4"/>
+ <path d="M27 30 Q62 40 102 30" fill="none" stroke="#e6bd69" stroke-width="5"/>
+ <path d="M54 28 L64 23 L74 29 L64 35Z" fill="#f6d98b"/>
+ <!-- staff arm and staff, animated casting -->
+ <g transform="translate(96 66) rotate(0)">
+  <path d="M0 0 L-4 67" stroke="#39241c" stroke-width="7"/><path d="M0 0 L-4 67" stroke="#c08b45" stroke-width="2.5"/>
+  <path d="M-9 -7 Q-18 -24 -2 -33 Q13 -39 18 -23 Q21 -9 5 -3" fill="none" stroke="#e3b95f" stroke-width="4"/>
+  <circle cx="4" cy="-20" r="12" fill="#a33dff" opacity=".35"/>
+  <circle cx="4" cy="-20" r="8" fill="#b95cff" stroke="#f1d5ff" stroke-width="2"/>
+ </g>
+ <path d="M9 28 l4 -7 4 7 -4 7Z" fill="#e8c5ff" opacity=".9"/>
+ </g><g transform="translate(0,0)">
+ <ellipse cx="64" cy="133" rx="32" ry="7" fill="#07100d" opacity=".48"/>
+ <!-- legs articulated -->
+ <g transform="translate(53 107) rotate(0)"><path d="M-7 0 L8 0 L10 22 L6 29 L-12 27 L-12 20Z" fill="#54258a" stroke="#1a1028" stroke-width="4"/><path d="M-12 22 L8 22 L8 30 L-14 30Z" fill="#33213e" stroke="#d6a84f" stroke-width="2"/></g>
+ <g transform="translate(75 107) rotate(0)"><path d="M-7 0 L8 0 L10 22 L6 29 L-12 27 L-12 20Z" fill="#40205f" stroke="#1a1028" stroke-width="4"/><path d="M-12 22 L8 22 L8 30 L-14 30Z" fill="#33213e" stroke="#d6a84f" stroke-width="2"/></g>
+ <!-- robe torso -->
+ <path d="M43 52 L84 52 L96 111 L82 126 L31 126 L19 111Z" fill="#241238" stroke="#130c20" stroke-width="5"/>
+ <path d="M45 55 L80 55 L87 108 L75 120 L34 120 L28 108Z" fill="#6b2da2" stroke="#d5a34b" stroke-width="3"/>
+ <path d="M62 61 L68 61 L70 116 L61 116Z" fill="#e5bd65"/><path d="M52 91 L64 82 L77 92 L72 106 L63 113 L53 105Z" fill="#32154f" stroke="#e6c16e" stroke-width="3"/>
+ <!-- arm with sleeve -->
+ <g transform="translate(39 65) rotate(8)"><path d="M-5 -3 L-18 5 L-21 29 L-10 36 L1 15Z" fill="#522080" stroke="#1a1026" stroke-width="4"/><path d="M-20 27 L-9 31 L-7 40 L-19 39Z" fill="#d8aa50"/><path d="M-18 37 Q-10 33 -5 40 L-5 48 L-17 49Z" fill="#d8aa87" stroke="#553328" stroke-width="2"/></g>
+ <g transform="translate(82 64) rotate(-3.6)"><path d="M2 -2 L17 5 L19 28 L8 35 L-1 15Z" fill="#7834ad" stroke="#1a1026" stroke-width="4"/><path d="M8 27 L19 25 L23 34 L12 39Z" fill="#d8aa50"/><path d="M12 37 Q20 33 25 40 L24 49 L13 49Z" fill="#d8aa87" stroke="#553328" stroke-width="2"/></g>
+ <!-- face, beard and hood -->
+ <path d="M45 28 Q48 7 65 8 Q84 9 85 31 L81 52 L70 62 L51 56 L42 43Z" fill="#d6a77c" stroke="#21162b" stroke-width="4"/>
+ <path d="M46 43 Q56 49 64 43 Q75 49 83 40 L80 56 L67 72 L51 61Z" fill="#f0e8d9" stroke="#a89b8d" stroke-width="3"/>
+ <path d="M46 29 Q39 10 57 4 Q80 -3 91 17 L86 34 Q64 39 46 29Z" fill="#602493" stroke="#180e29" stroke-width="4"/>
+ <path d="M24 31 Q51 19 105 31 Q92 43 64 40 Q38 41 24 31Z" fill="#2c1546" stroke="#160d22" stroke-width="4"/>
+ <path d="M27 30 Q62 40 102 30" fill="none" stroke="#e6bd69" stroke-width="5"/>
+ <path d="M54 28 L64 23 L74 29 L64 35Z" fill="#f6d98b"/>
+ <!-- staff arm and staff, animated casting -->
+ <g transform="translate(96 66) rotate(-8)">
+  <path d="M0 0 L-4 67" stroke="#39241c" stroke-width="7"/><path d="M0 0 L-4 67" stroke="#c08b45" stroke-width="2.5"/>
+  <path d="M-9 -7 Q-18 -24 -2 -33 Q13 -39 18 -23 Q21 -9 5 -3" fill="none" stroke="#e3b95f" stroke-width="4"/>
+  <circle cx="4" cy="-20" r="12" fill="#a33dff" opacity=".35"/>
+  <circle cx="4" cy="-20" r="8" fill="#b95cff" stroke="#f1d5ff" stroke-width="2"/>
+ </g>
+ <path d="M9 27 l4 -7 4 7 -4 7Z" fill="#e8c5ff" opacity=".9"/>
+ </g><g transform="translate(128,0)">
+ <ellipse cx="64" cy="133" rx="32" ry="7" fill="#07100d" opacity=".48"/>
+ <!-- legs articulated -->
+ <g transform="translate(53 107) rotate(0)"><path d="M-7 0 L8 0 L10 22 L6 29 L-12 27 L-12 20Z" fill="#54258a" stroke="#1a1028" stroke-width="4"/><path d="M-12 22 L8 22 L8 30 L-14 30Z" fill="#33213e" stroke="#d6a84f" stroke-width="2"/></g>
+ <g transform="translate(75 107) rotate(0)"><path d="M-7 0 L8 0 L10 22 L6 29 L-12 27 L-12 20Z" fill="#40205f" stroke="#1a1028" stroke-width="4"/><path d="M-12 22 L8 22 L8 30 L-14 30Z" fill="#33213e" stroke="#d6a84f" stroke-width="2"/></g>
+ <!-- robe torso -->
+ <path d="M43 52 L84 52 L96 111 L82 126 L31 126 L19 111Z" fill="#241238" stroke="#130c20" stroke-width="5"/>
+ <path d="M45 55 L80 55 L87 108 L75 120 L34 120 L28 108Z" fill="#6b2da2" stroke="#d5a34b" stroke-width="3"/>
+ <path d="M62 61 L68 61 L70 116 L61 116Z" fill="#e5bd65"/><path d="M52 91 L64 82 L77 92 L72 106 L63 113 L53 105Z" fill="#32154f" stroke="#e6c16e" stroke-width="3"/>
+ <!-- arm with sleeve -->
+ <g transform="translate(39 65) rotate(30)"><path d="M-5 -3 L-18 5 L-21 29 L-10 36 L1 15Z" fill="#522080" stroke="#1a1026" stroke-width="4"/><path d="M-20 27 L-9 31 L-7 40 L-19 39Z" fill="#d8aa50"/><path d="M-18 37 Q-10 33 -5 40 L-5 48 L-17 49Z" fill="#d8aa87" stroke="#553328" stroke-width="2"/></g>
+ <g transform="translate(82 64) rotate(-13.5)"><path d="M2 -2 L17 5 L19 28 L8 35 L-1 15Z" fill="#7834ad" stroke="#1a1026" stroke-width="4"/><path d="M8 27 L19 25 L23 34 L12 39Z" fill="#d8aa50"/><path d="M12 37 Q20 33 25 40 L24 49 L13 49Z" fill="#d8aa87" stroke="#553328" stroke-width="2"/></g>
+ <!-- face, beard and hood -->
+ <path d="M45 28 Q48 7 65 8 Q84 9 85 31 L81 52 L70 62 L51 56 L42 43Z" fill="#d6a77c" stroke="#21162b" stroke-width="4"/>
+ <path d="M46 43 Q56 49 64 43 Q75 49 83 40 L80 56 L67 72 L51 61Z" fill="#f0e8d9" stroke="#a89b8d" stroke-width="3"/>
+ <path d="M46 29 Q39 10 57 4 Q80 -3 91 17 L86 34 Q64 39 46 29Z" fill="#602493" stroke="#180e29" stroke-width="4"/>
+ <path d="M24 31 Q51 19 105 31 Q92 43 64 40 Q38 41 24 31Z" fill="#2c1546" stroke="#160d22" stroke-width="4"/>
+ <path d="M27 30 Q62 40 102 30" fill="none" stroke="#e6bd69" stroke-width="5"/>
+ <path d="M54 28 L64 23 L74 29 L64 35Z" fill="#f6d98b"/>
+ <!-- staff arm and staff, animated casting -->
+ <g transform="translate(96 66) rotate(-28)">
+  <path d="M0 0 L-4 67" stroke="#39241c" stroke-width="7"/><path d="M0 0 L-4 67" stroke="#c08b45" stroke-width="2.5"/>
+  <path d="M-9 -7 Q-18 -24 -2 -33 Q13 -39 18 -23 Q21 -9 5 -3" fill="none" stroke="#e3b95f" stroke-width="4"/>
+  <circle cx="4" cy="-20" r="12" fill="#a33dff" opacity=".35"/>
+  <circle cx="4" cy="-20" r="8" fill="#b95cff" stroke="#f1d5ff" stroke-width="2"/>
+ </g>
+ <path d="M9 16 l4 -7 4 7 -4 7Z" fill="#e8c5ff" opacity=".9"/>
+ </g><g transform="translate(256,0)">
+ <ellipse cx="64" cy="133" rx="32" ry="7" fill="#07100d" opacity=".48"/>
+ <!-- legs articulated -->
+ <g transform="translate(53 107) rotate(0)"><path d="M-7 0 L8 0 L10 22 L6 29 L-12 27 L-12 20Z" fill="#54258a" stroke="#1a1028" stroke-width="4"/><path d="M-12 22 L8 22 L8 30 L-14 30Z" fill="#33213e" stroke="#d6a84f" stroke-width="2"/></g>
+ <g transform="translate(75 107) rotate(0)"><path d="M-7 0 L8 0 L10 22 L6 29 L-12 27 L-12 20Z" fill="#40205f" stroke="#1a1028" stroke-width="4"/><path d="M-12 22 L8 22 L8 30 L-14 30Z" fill="#33213e" stroke="#d6a84f" stroke-width="2"/></g>
+ <!-- robe torso -->
+ <path d="M43 52 L84 52 L96 111 L82 126 L31 126 L19 111Z" fill="#241238" stroke="#130c20" stroke-width="5"/>
+ <path d="M45 55 L80 55 L87 108 L75 120 L34 120 L28 108Z" fill="#6b2da2" stroke="#d5a34b" stroke-width="3"/>
+ <path d="M62 61 L68 61 L70 116 L61 116Z" fill="#e5bd65"/><path d="M52 91 L64 82 L77 92 L72 106 L63 113 L53 105Z" fill="#32154f" stroke="#e6c16e" stroke-width="3"/>
+ <!-- arm with sleeve -->
+ <g transform="translate(39 65) rotate(48)"><path d="M-5 -3 L-18 5 L-21 29 L-10 36 L1 15Z" fill="#522080" stroke="#1a1026" stroke-width="4"/><path d="M-20 27 L-9 31 L-7 40 L-19 39Z" fill="#d8aa50"/><path d="M-18 37 Q-10 33 -5 40 L-5 48 L-17 49Z" fill="#d8aa87" stroke="#553328" stroke-width="2"/></g>
+ <g transform="translate(82 64) rotate(-21.6)"><path d="M2 -2 L17 5 L19 28 L8 35 L-1 15Z" fill="#7834ad" stroke="#1a1026" stroke-width="4"/><path d="M8 27 L19 25 L23 34 L12 39Z" fill="#d8aa50"/><path d="M12 37 Q20 33 25 40 L24 49 L13 49Z" fill="#d8aa87" stroke="#553328" stroke-width="2"/></g>
+ <!-- face, beard and hood -->
+ <path d="M45 28 Q48 7 65 8 Q84 9 85 31 L81 52 L70 62 L51 56 L42 43Z" fill="#d6a77c" stroke="#21162b" stroke-width="4"/>
+ <path d="M46 43 Q56 49 64 43 Q75 49 83 40 L80 56 L67 72 L51 61Z" fill="#f0e8d9" stroke="#a89b8d" stroke-width="3"/>
+ <path d="M46 29 Q39 10 57 4 Q80 -3 91 17 L86 34 Q64 39 46 29Z" fill="#602493" stroke="#180e29" stroke-width="4"/>
+ <path d="M24 31 Q51 19 105 31 Q92 43 64 40 Q38 41 24 31Z" fill="#2c1546" stroke="#160d22" stroke-width="4"/>
+ <path d="M27 30 Q62 40 102 30" fill="none" stroke="#e6bd69" stroke-width="5"/>
+ <path d="M54 28 L64 23 L74 29 L64 35Z" fill="#f6d98b"/>
+ <!-- staff arm and staff, animated casting -->
+ <g transform="translate(96 66) rotate(-48)">
+  <path d="M0 0 L-4 67" stroke="#39241c" stroke-width="7"/><path d="M0 0 L-4 67" stroke="#c08b45" stroke-width="2.5"/>
+  <path d="M-9 -7 Q-18 -24 -2 -33 Q13 -39 18 -23 Q21 -9 5 -3" fill="none" stroke="#e3b95f" stroke-width="4"/>
+  <circle cx="4" cy="-20" r="17" fill="#a33dff" opacity=".35"/>
+  <circle cx="4" cy="-20" r="8" fill="#b95cff" stroke="#f1d5ff" stroke-width="2"/>
+ </g>
+ <path d="M9 8 l4 -7 4 7 -4 7Z" fill="#e8c5ff" opacity=".9"/>
+ </g><g transform="translate(384,0)">
+ <ellipse cx="64" cy="133" rx="32" ry="7" fill="#07100d" opacity=".48"/>
+ <!-- legs articulated -->
+ <g transform="translate(53 107) rotate(0)"><path d="M-7 0 L8 0 L10 22 L6 29 L-12 27 L-12 20Z" fill="#54258a" stroke="#1a1028" stroke-width="4"/><path d="M-12 22 L8 22 L8 30 L-14 30Z" fill="#33213e" stroke="#d6a84f" stroke-width="2"/></g>
+ <g transform="translate(75 107) rotate(0)"><path d="M-7 0 L8 0 L10 22 L6 29 L-12 27 L-12 20Z" fill="#40205f" stroke="#1a1028" stroke-width="4"/><path d="M-12 22 L8 22 L8 30 L-14 30Z" fill="#33213e" stroke="#d6a84f" stroke-width="2"/></g>
+ <!-- robe torso -->
+ <path d="M43 52 L84 52 L96 111 L82 126 L31 126 L19 111Z" fill="#241238" stroke="#130c20" stroke-width="5"/>
+ <path d="M45 55 L80 55 L87 108 L75 120 L34 120 L28 108Z" fill="#6b2da2" stroke="#d5a34b" stroke-width="3"/>
+ <path d="M62 61 L68 61 L70 116 L61 116Z" fill="#e5bd65"/><path d="M52 91 L64 82 L77 92 L72 106 L63 113 L53 105Z" fill="#32154f" stroke="#e6c16e" stroke-width="3"/>
+ <!-- arm with sleeve -->
+ <g transform="translate(39 65) rotate(22)"><path d="M-5 -3 L-18 5 L-21 29 L-10 36 L1 15Z" fill="#522080" stroke="#1a1026" stroke-width="4"/><path d="M-20 27 L-9 31 L-7 40 L-19 39Z" fill="#d8aa50"/><path d="M-18 37 Q-10 33 -5 40 L-5 48 L-17 49Z" fill="#d8aa87" stroke="#553328" stroke-width="2"/></g>
+ <g transform="translate(82 64) rotate(-9.9)"><path d="M2 -2 L17 5 L19 28 L8 35 L-1 15Z" fill="#7834ad" stroke="#1a1026" stroke-width="4"/><path d="M8 27 L19 25 L23 34 L12 39Z" fill="#d8aa50"/><path d="M12 37 Q20 33 25 40 L24 49 L13 49Z" fill="#d8aa87" stroke="#553328" stroke-width="2"/></g>
+ <!-- face, beard and hood -->
+ <path d="M45 28 Q48 7 65 8 Q84 9 85 31 L81 52 L70 62 L51 56 L42 43Z" fill="#d6a77c" stroke="#21162b" stroke-width="4"/>
+ <path d="M46 43 Q56 49 64 43 Q75 49 83 40 L80 56 L67 72 L51 61Z" fill="#f0e8d9" stroke="#a89b8d" stroke-width="3"/>
+ <path d="M46 29 Q39 10 57 4 Q80 -3 91 17 L86 34 Q64 39 46 29Z" fill="#602493" stroke="#180e29" stroke-width="4"/>
+ <path d="M24 31 Q51 19 105 31 Q92 43 64 40 Q38 41 24 31Z" fill="#2c1546" stroke="#160d22" stroke-width="4"/>
+ <path d="M27 30 Q62 40 102 30" fill="none" stroke="#e6bd69" stroke-width="5"/>
+ <path d="M54 28 L64 23 L74 29 L64 35Z" fill="#f6d98b"/>
+ <!-- staff arm and staff, animated casting -->
+ <g transform="translate(96 66) rotate(-24)">
+  <path d="M0 0 L-4 67" stroke="#39241c" stroke-width="7"/><path d="M0 0 L-4 67" stroke="#c08b45" stroke-width="2.5"/>
+  <path d="M-9 -7 Q-18 -24 -2 -33 Q13 -39 18 -23 Q21 -9 5 -3" fill="none" stroke="#e3b95f" stroke-width="4"/>
+  <circle cx="4" cy="-20" r="12" fill="#a33dff" opacity=".35"/>
+  <circle cx="4" cy="-20" r="8" fill="#b95cff" stroke="#f1d5ff" stroke-width="2"/>
+ </g>
+ <path d="M9 18 l4 -7 4 7 -4 7Z" fill="#e8c5ff" opacity=".9"/>
+ </g></svg>
