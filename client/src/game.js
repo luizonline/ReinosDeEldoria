@@ -89,19 +89,37 @@ function drawTree(c,x,y,s=1,seed=0){
 function drawHouse(c,x,y,scale=1,kind=0){
  c.save();c.translate(x,y);c.scale(scale,scale);
  const w=kind?190:160,h=105;
- c.fillStyle="#243b30";c.fillRect(7,25,w,h);
- c.fillStyle="#725238";c.fillRect(0,12,w,h-10);
- c.fillStyle="#d7c49a";c.fillRect(8,22,w-16,h-28);
- // timber frame
- c.fillStyle="#65452f";c.fillRect(8,22,8,h-28);c.fillRect(w-16,22,8,h-28);c.fillRect(w/2-4,22,8,h-28);c.fillRect(8,58,w-16,7);
- // roof
- c.fillStyle="#3e403b";c.beginPath();c.moveTo(-18,24);c.lineTo(w/2,-58);c.lineTo(w+18,24);c.closePath();c.fill();
- c.fillStyle=kind?"#52624e":"#66645a";c.beginPath();c.moveTo(-9,21);c.lineTo(w/2,-48);c.lineTo(w+9,21);c.closePath();c.fill();
- for(let r=0;r<5;r++){c.strokeStyle="#7b7768";c.lineWidth=2;c.beginPath();c.moveTo(4+r*8,18-r*10);c.lineTo(w/2, -47+r*2);c.lineTo(w-4-r*8,18-r*10);c.stroke();}
- // door and windows
- c.fillStyle="#49372b";c.fillRect(w*.43,68,32,44);c.fillStyle="#a58a5e";c.fillRect(w*.43+4,72,24,40);
- for(const wx of [23,w-48]){c.fillStyle="#634a34";c.fillRect(wx,39,26,25);c.fillStyle="#8bc0bd";c.fillRect(wx+3,42,20,19);c.fillStyle="#d9c28c";c.fillRect(wx+12,42,3,19);c.fillRect(wx+3,50,20,3);}
- c.fillStyle="#d7b86e";c.fillRect(w-25,76,5,5);
+ // Sombra de contato e fundação de pedra
+ c.fillStyle="#17241e88";c.beginPath();c.ellipse(w/2+8,h+17,w*.68,19,0,0,Math.PI*2);c.fill();
+ c.fillStyle="#625846";c.fillRect(-5,h-5,w+10,13);
+ for(let i=0;i<Math.ceil(w/18);i++){c.fillStyle=i%2?"#928a73":"#aaa087";c.fillRect(i*18-3,h-4,15,8);c.strokeStyle="#514c40";c.lineWidth=1;c.strokeRect(i*18-3,h-4,15,8);}
+ // Paredes em madeira e reboco com luz lateral
+ const wall=c.createLinearGradient(0,15,w,100);wall.addColorStop(0,"#e4d3a9");wall.addColorStop(.55,"#cdbb91");wall.addColorStop(1,"#9e8c6a");
+ c.fillStyle="#493728";c.fillRect(4,16,w,h-12);
+ c.fillStyle=wall;c.fillRect(8,22,w-16,h-28);
+ // Estrutura de madeira aparente
+ c.fillStyle="#5b3d2a";c.fillRect(8,22,9,h-28);c.fillRect(w-17,22,9,h-28);c.fillRect(w/2-4,22,8,h-28);c.fillRect(8,58,w-16,7);
+ c.strokeStyle="#8c6845";c.lineWidth=3;c.beginPath();c.moveTo(18,28);c.lineTo(w/2-8,55);c.moveTo(w/2+8,55);c.lineTo(w-18,28);c.stroke();
+ // Telhado com duas águas e textura de telhas
+ c.fillStyle="#302d2a";c.beginPath();c.moveTo(-20,25);c.lineTo(w/2,-61);c.lineTo(w+20,25);c.closePath();c.fill();
+ const roof=c.createLinearGradient(0,-55,0,28);roof.addColorStop(0,kind?"#68705a":"#777064");roof.addColorStop(1,"#353b35");
+ c.fillStyle=roof;c.beginPath();c.moveTo(-10,21);c.lineTo(w/2,-51);c.lineTo(w+10,21);c.closePath();c.fill();
+ for(let row=0;row<5;row++){
+  const yy=-38+row*12,spread=(row+1)*10;
+  c.strokeStyle=row%2?"#a19a7e":"#8a8068";c.globalAlpha=.55;c.lineWidth=2;
+  c.beginPath();c.moveTo(w/2-spread,yy+9);c.lineTo(w/2,yy-8);c.lineTo(w/2+spread,yy+9);c.stroke();
+ }
+ c.globalAlpha=1;c.strokeStyle="#b0a184";c.lineWidth=2;c.beginPath();c.moveTo(-10,21);c.lineTo(w/2,-51);c.lineTo(w+10,21);c.stroke();
+ // Porta, janelas com reflexo e molduras
+ c.fillStyle="#3e3027";c.fillRect(w*.43,68,32,44);c.fillStyle="#795638";c.fillRect(w*.43+4,72,24,40);c.fillStyle="#b18a50";c.fillRect(w*.43+22,89,3,3);
+ for(const wx of [23,w-48]){
+  c.fillStyle="#4a3528";c.fillRect(wx-3,36,32,31);c.fillStyle="#8f7954";c.fillRect(wx,39,26,25);
+  const glass=c.createLinearGradient(wx,40,wx+24,62);glass.addColorStop(0,"#b9e0d6");glass.addColorStop(1,"#477e83");
+  c.fillStyle=glass;c.fillRect(wx+3,42,20,19);c.fillStyle="#d9c69b";c.fillRect(wx+12,42,3,19);c.fillRect(wx+3,50,20,3);
+ }
+ // Beiral e pequenos detalhes de construção
+ c.fillStyle="#493728";c.fillRect(-8,18,w+16,6);c.fillStyle="#9a754b";c.fillRect(-5,18,w+10,2);
+ c.fillStyle="#d7b86e";c.beginPath();c.arc(w-25,78,2.5,0,Math.PI*2);c.fill();
  c.restore();
 }
 function drawDecoration(c,x,y,type,seed){c.save();c.translate(x,y);if(type==="torch"){c.fillStyle="#60472d";c.fillRect(-3,-1,6,26);c.fillStyle="#e18a37";c.beginPath();c.arc(0,-5,7,0,Math.PI*2);c.fill();c.fillStyle="#ffe18a";c.beginPath();c.arc(0,-7,3,0,Math.PI*2);c.fill();}else if(type==="flower"){c.fillStyle="#2c623b";c.fillRect(-1,0,2,10);c.fillStyle=seed%2?"#e9a3ca":"#f4d36f";for(let i=0;i<5;i++){const a=i*Math.PI*2/5;c.beginPath();c.arc(Math.cos(a)*4,-3+Math.sin(a)*4,2.5,0,Math.PI*2);c.fill();}}else{c.fillStyle="#827e70";c.fillRect(-5,0,11,6);c.fillStyle="#b2aa91";c.fillRect(-3,-3,6,4);}c.restore();}
