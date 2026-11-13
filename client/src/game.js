@@ -263,7 +263,7 @@ function drawMonster(m,t){
  label(m.name,m.x,barY-6,m.kind==="wolf"?"#e0e9f2":"#e8ddc6");
 }
 function drawActor(x,y,type,t){
- if(type==="player"){ctx.fillStyle="#08120d88";ctx.beginPath();ctx.ellipse(x,y+3,17,6,0,0,Math.PI*2);ctx.fill();if(!drawClassSpriteSheet(x,y,t))drawPixelHero(x,y,t);if(equipment.armor){ctx.save();ctx.globalAlpha=.82;ctx.fillStyle="#b7c7d0";ctx.fillRect(x-8,y-35,16,5);ctx.fillStyle="#6f8798";ctx.fillRect(x-10,y-29,20,4);ctx.restore();}if(equipment.weapon){ctx.save();ctx.strokeStyle="#f0d18a";ctx.lineWidth=3;ctx.shadowColor="#f0d18a";ctx.shadowBlur=8;ctx.beginPath();ctx.moveTo(x+15,y-18);ctx.lineTo(x+23,y-39);ctx.stroke();ctx.restore();}label("Viajante",x,y-57);return;}
+ if(type==="player"){ctx.fillStyle="#08120d88";ctx.beginPath();ctx.ellipse(x,y+3,17,6,0,0,Math.PI*2);ctx.fill();drawPixelHero(x,y,t);if(equipment.armor){ctx.save();ctx.globalAlpha=.82;ctx.fillStyle="#b7c7d0";ctx.fillRect(x-8,y-35,16,5);ctx.fillStyle="#6f8798";ctx.fillRect(x-10,y-29,20,4);ctx.restore();}if(equipment.weapon){ctx.save();ctx.strokeStyle="#f0d18a";ctx.lineWidth=3;ctx.shadowColor="#f0d18a";ctx.shadowBlur=8;ctx.beginPath();ctx.moveTo(x+15,y-18);ctx.lineTo(x+23,y-39);ctx.stroke();ctx.restore();}label("Viajante",x,y-57);return;}
  if(type==="monster"){const m=monsters.find(v=>v.x===x&&v.y===y);if(m)drawMonster(m,t);return;}
  ctx.fillStyle="#1b2c24";ctx.beginPath();ctx.ellipse(x,y+5,13,6,0,0,Math.PI*2);ctx.fill();ctx.fillStyle="#9b7843";ctx.fillRect(x-9,y-18,18,22);ctx.fillStyle="#dfbd91";ctx.beginPath();ctx.arc(x,y-24,8,0,Math.PI*2);ctx.fill();ctx.fillStyle="#57402f";ctx.fillRect(x-9,y-31,18,6);ctx.fillStyle="#d4b66f";ctx.fillRect(x-12,y-18,24,4);label("Guardião",x,y-38,"#ffe2a0");
 }
