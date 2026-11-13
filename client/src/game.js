@@ -290,7 +290,23 @@ function drawMonster(m,t){
  label(m.name,m.x,barY-6,m.kind==="wolf"?"#e0e9f2":"#e8ddc6");
 }
 function drawActor(x,y,type,t){
- if(type==="player"){ctx.fillStyle="#08120d88";ctx.beginPath();ctx.ellipse(x,y+3,22,7,0,0,Math.PI*2);ctx.fill();if(chosenClass==="mage"&&mageEldoriaSprite.complete&&mageEldoriaSprite.naturalWidth){const bob=Math.sin(t/360)*1.2;ctx.save();ctx.shadowColor="#a64cff";ctx.shadowBlur=12;ctx.drawImage(mageEldoriaSprite,x-43,y-91+bob,86,97);ctx.restore();}else{drawPixelHero(x,y,t);}if(equipment.armor){ctx.save();ctx.globalAlpha=.82;ctx.fillStyle="#b7c7d0";ctx.fillRect(x-8,y-35,16,5);ctx.fillStyle="#6f8798";ctx.fillRect(x-10,y-29,20,4);ctx.restore();}if(equipment.weapon){ctx.save();ctx.strokeStyle="#f0d18a";ctx.lineWidth=3;ctx.shadowColor="#f0d18a";ctx.shadowBlur=8;ctx.beginPath();ctx.moveTo(x+15,y-18);ctx.lineTo(x+23,y-39);ctx.stroke();ctx.restore();}label("Viajante",x,y-(chosenClass==="mage"&&mageEldoriaSprite.complete&&mageEldoriaSprite.naturalWidth?99:57));return;}
+ if(type==="player"){ctx.fillStyle="#08120d88";ctx.beginPath();ctx.ellipse(x,y+3,22,7,0,0,Math.PI*2);ctx.fill();if(chosenClass==="mage"&&mageEldoriaSprite.complete&&mageEldoriaSprite.naturalWidth){
+ const moving=Math.hypot(player.tx-player.x,player.ty-player.y)>2;
+ const walkingPhase=player.step*1.8;
+ const attacking=attackState>0;
+ const bob=moving?Math.abs(Math.sin(walkingPhase))*3.4:Math.sin(t/310)*1.1;
+ const stride=moving?Math.sin(walkingPhase)*.045:0;
+ const recoil=attacking?Math.sin((1-attackState)*Math.PI)*-.11:0;
+ ctx.save();ctx.translate(x,y-43+bob);ctx.rotate(stride+recoil);ctx.scale(1+Math.sin(walkingPhase*2)*.012,1-Math.abs(Math.sin(walkingPhase*2))*.012);
+ ctx.shadowColor="#a64cff";ctx.shadowBlur=attacking?23:12;ctx.drawImage(mageEldoriaSprite,-43,-48,86,97);ctx.restore();
+ // Cristal do cajado pulsa e libera partículas durante ataques mágicos
+ const orbX=x+25,orbY=y-70+bob;
+ const pulse=1+Math.sin(t/75)*.16+(attacking?.35:0);
+ ctx.save();ctx.globalCompositeOperation="lighter";ctx.shadowColor="#c77aff";ctx.shadowBlur=attacking?28:15;
+ ctx.fillStyle=attacking?"#f5dcff":"#b96cff";ctx.beginPath();ctx.arc(orbX,orbY,attacking?7*pulse:4.5*pulse,0,Math.PI*2);ctx.fill();
+ ctx.strokeStyle="#e8c7ff";ctx.lineWidth=1.4;ctx.beginPath();ctx.arc(orbX,orbY,9*pulse, t/180,t/180+Math.PI*1.35);ctx.stroke();ctx.restore();
+ if(attacking){for(let n=0;n<3;n++){const a=t/95+n*Math.PI*2/3;ctx.fillStyle="#e8baff";ctx.globalAlpha=.8;ctx.beginPath();ctx.arc(orbX+Math.cos(a)*14,orbY+Math.sin(a)*14,2,0,Math.PI*2);ctx.fill();}ctx.globalAlpha=1;}
+ }else{drawPixelHero(x,y,t);}if(equipment.armor){ctx.save();ctx.globalAlpha=.82;ctx.fillStyle="#b7c7d0";ctx.fillRect(x-8,y-35,16,5);ctx.fillStyle="#6f8798";ctx.fillRect(x-10,y-29,20,4);ctx.restore();}if(equipment.weapon){ctx.save();ctx.strokeStyle="#f0d18a";ctx.lineWidth=3;ctx.shadowColor="#f0d18a";ctx.shadowBlur=8;ctx.beginPath();ctx.moveTo(x+15,y-18);ctx.lineTo(x+23,y-39);ctx.stroke();ctx.restore();}label("Viajante",x,y-(chosenClass==="mage"&&mageEldoriaSprite.complete&&mageEldoriaSprite.naturalWidth?99:57));return;}
  if(type==="monster"){const m=monsters.find(v=>v.x===x&&v.y===y);if(m)drawMonster(m,t);return;}
  ctx.fillStyle="#1b2c24";ctx.beginPath();ctx.ellipse(x,y+5,13,6,0,0,Math.PI*2);ctx.fill();ctx.fillStyle="#9b7843";ctx.fillRect(x-9,y-18,18,22);ctx.fillStyle="#dfbd91";ctx.beginPath();ctx.arc(x,y-24,8,0,Math.PI*2);ctx.fill();ctx.fillStyle="#57402f";ctx.fillRect(x-9,y-31,18,6);ctx.fillStyle="#d4b66f";ctx.fillRect(x-12,y-18,24,4);label("Guardião",x,y-38,"#ffe2a0");
 }
