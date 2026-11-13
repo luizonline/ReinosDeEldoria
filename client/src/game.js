@@ -224,7 +224,7 @@ function drawPixelHero(x,y,t){
  }
  ctx.restore();ctx.restore();
 }
-function drawSlime(x,y,t){
+function drawSlime(x,y,t,hp=monsterHp,name="Slime Verde"){
  const phase=t/170,hop=Math.max(0,Math.sin(phase))*5,squash=1+Math.sin(phase*2)*.08;
  ctx.save();ctx.translate(x,y-hop);ctx.scale(squash,1/squash);
  ctx.fillStyle="#142d2188";ctx.beginPath();ctx.ellipse(0,7,22,6,0,0,Math.PI*2);ctx.fill();
@@ -234,14 +234,14 @@ function drawSlime(x,y,t){
  ctx.fillStyle="#173b30";ctx.fillRect(-8,-13,3,4);ctx.fillRect(7,-13,3,4);
  ctx.strokeStyle="#174c36";ctx.lineWidth=2;ctx.beginPath();ctx.arc(0,-5,5,.15,Math.PI-.15);ctx.stroke();
  ctx.fillStyle="#d6ffe1";ctx.globalAlpha=.55;ctx.beginPath();ctx.arc(-11,-22,4,0,Math.PI*2);ctx.fill();ctx.restore();
- ctx.fillStyle="#26352d";ctx.fillRect(x-24,y-43-hop,48,6);ctx.fillStyle="#d94f58";ctx.fillRect(x-23,y-42-hop,46*Math.max(0,monsterHp/60),4);
- label("Slime Verde",x,y-49-hop,"#caffc8");
+ ctx.fillStyle="#26352d";ctx.fillRect(x-24,y-43-hop,48,6);ctx.fillStyle="#d94f58";ctx.fillRect(x-23,y-42-hop,46*Math.max(0,hp/60),4);
+ label(name,x,y-49-hop,"#caffc8");
 }
 function drawMonster(m,t){
  if(!m.alive)return;
- if(m.kind==="slime"){drawSlime(m.x,m.y,t);return;}
+ if(m.kind==="slime"){drawSlime(m.x,m.y,t,m.hp,m.name);return;}
  const moving=Math.sin(t/(m.kind==="wolf"?95:175)),bob=moving*1.8;
- ctx.save();ctx.translate(m.x,m.y+bob);
+ ctx.save();ctx.translate(m.x,m.y+bob);ctx.scale(1.18,1.18);
  ctx.fillStyle="#101b1a88";ctx.beginPath();ctx.ellipse(0,6,m.kind==="wolf"?24:18,7,0,0,Math.PI*2);ctx.fill();
  if(m.kind==="wolf"){
   // Lobo: dorso, patas, focinho, orelhas e pelo em camadas
@@ -255,7 +255,11 @@ function drawMonster(m,t){
   ctx.fillStyle="#242b30";ctx.beginPath();ctx.arc(29,-20,2.5,0,Math.PI*2);ctx.fill();
   ctx.fillStyle="#e8c56d";ctx.shadowColor="#e8c56d";ctx.shadowBlur=7;ctx.beginPath();ctx.arc(16,-27,2,0,Math.PI*2);ctx.fill();ctx.shadowBlur=0;
   ctx.strokeStyle="#252e34";ctx.lineWidth=2;ctx.beginPath();ctx.moveTo(20,-16);ctx.lineTo(26,-15);ctx.stroke();
-  ctx.strokeStyle="#a9b2b6";ctx.lineWidth=2;ctx.beginPath();ctx.moveTo(-13,-23);ctx.lineTo(-21,-29);ctx.moveTo(-9,-27);ctx.lineTo(-16,-34);ctx.stroke();
+  ctx.strokeStyle="#a9b2b6";ctx.lineWidth=2;ctx.beginPath();ctx.moveTo(-13,-23);ctx.lineTo(-21,-29);ctx.moveTo(-9,-27);ctx.lineTo(-16,-34);ctx.stroke(); 
+  // Mechas de pelo, sobrancelha e focinho com luz lateral
+  ctx.strokeStyle="#c1cbd0";ctx.lineWidth=1.4;ctx.beginPath();ctx.moveTo(-13,-25);ctx.lineTo(-19,-28);ctx.moveTo(-8,-29);ctx.lineTo(-13,-35);ctx.moveTo(-2,-27);ctx.lineTo(-5,-33);ctx.stroke();
+  ctx.fillStyle="#e2e8e5";ctx.beginPath();ctx.ellipse(22,-22,5,2.5,.15,0,Math.PI*2);ctx.fill();
+  ctx.strokeStyle="#202a31";ctx.lineWidth=1;ctx.beginPath();ctx.moveTo(13,-30);ctx.quadraticCurveTo(17,-33,20,-30);ctx.stroke();
  }else{
   // Esqueleto: costelas, articulações e armadura antiga
   ctx.strokeStyle="#6f716c";ctx.lineWidth=5;ctx.lineCap="round";ctx.beginPath();
@@ -272,6 +276,9 @@ function drawMonster(m,t){
   ctx.fillStyle="#75634c";ctx.beginPath();ctx.moveTo(17,-31);ctx.lineTo(23,-28);ctx.lineTo(22,-12);ctx.lineTo(16,-8);ctx.closePath();ctx.fill();
   ctx.strokeStyle="#b8aa8c";ctx.lineWidth=1.5;ctx.beginPath();ctx.moveTo(19,-27);ctx.lineTo(17,-18);ctx.lineTo(21,-14);ctx.stroke();
   ctx.strokeStyle="#827967";ctx.lineWidth=3;ctx.beginPath();ctx.moveTo(16,-25);ctx.lineTo(22,-49);ctx.stroke();
+  // Rachaduras, brilho ósseo e rebites do escudo
+  ctx.strokeStyle="#fff0d1";ctx.lineWidth=1;ctx.beginPath();ctx.moveTo(-6,-47);ctx.lineTo(-2,-43);ctx.lineTo(-5,-39);ctx.moveTo(-7,-25);ctx.lineTo(-3,-22);ctx.stroke();
+  ctx.fillStyle="#d8bd7c";ctx.beginPath();ctx.arc(19,-22,1.5,0,Math.PI*2);ctx.fill();
   ctx.fillStyle="#c6bda7";ctx.beginPath();ctx.moveTo(18,-52);ctx.lineTo(24,-44);ctx.lineTo(17,-44);ctx.closePath();ctx.fill();
  }
  ctx.restore();
