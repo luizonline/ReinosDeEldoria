@@ -56,11 +56,34 @@ function drawGround(c){
 }
 function drawTree(c,x,y,s=1,seed=0){
  c.save();c.translate(x,y);c.scale(s,s);
- c.fillStyle="#263c2b";c.beginPath();c.ellipse(3,17,25,12,0,0,Math.PI*2);c.fill();
- c.fillStyle="#66472e";c.fillRect(-6,-4,12,31);
- const layers=[[-1,-17,25,"#24543a"],[-15,-7,17,"#2c6841"],[14,-8,17,"#347447"],[0,-30,15,"#4c8c4d"],[-7,-20,10,"#5b9d50"],[10,-22,11,"#43874a"]];
- for(let i=0;i<layers.length;i++){const [ox,oy,r,col]=layers[i];c.fillStyle=col;c.beginPath();c.arc(ox,oy,r,0,Math.PI*2);c.fill();}
- for(let i=0;i<18;i++){const a=rand(seed*31+i)*Math.PI*2,r=rand(seed*71+i+9)*18;c.fillStyle=i%3===0?"#8dbb56":i%3===1?"#6cab4e":"#3d8145";c.fillRect(Math.cos(a)*r-2,Math.sin(a)*r-20,4,4);}
+ // Sombra projetada e raízes para dar volume ao cenário
+ c.fillStyle="#17271f66";c.beginPath();c.ellipse(5,19,31,13,-.12,0,Math.PI*2);c.fill();
+ c.fillStyle="#4a3527";c.beginPath();c.moveTo(-7,4);c.lineTo(-10,25);c.lineTo(-4,29);c.lineTo(0,18);c.lineTo(6,29);c.lineTo(11,25);c.lineTo(7,3);c.closePath();c.fill();
+ c.strokeStyle="#8a6240";c.lineWidth=3;c.beginPath();c.moveTo(0,15);c.lineTo(-15,27);c.moveTo(3,16);c.lineTo(18,25);c.stroke();
+ const canopy=[
+  [-18,-13,19,"#244d35"],[5,-17,23,"#2d603b"],[23,-8,17,"#326b40"],
+  [-27,1,14,"#326b3e"],[-5,1,23,"#397849"],[17,4,18,"#28613a"],
+  [-8,-34,17,"#4c8950"],[12,-34,15,"#559653"],[-23,-28,13,"#3c7946"],
+  [0,-23,20,"#43834a"]
+ ];
+ for(let i=0;i<canopy.length;i++){
+  const [ox,oy,r,col]=canopy[i];
+  const g=c.createRadialGradient(ox-r*.35,oy-r*.55,2,ox,oy,r*1.35);
+  g.addColorStop(0,i%3===0?"#80ad5b":i%3===1?"#659c50":"#477f47");
+  g.addColorStop(.58,col);g.addColorStop(1,"#1d4932");
+  c.fillStyle=g;c.beginPath();c.arc(ox,oy,r,0,Math.PI*2);c.fill();
+ }
+ // Folhas iluminadas e pequenas aberturas entre os galhos
+ for(let i=0;i<34;i++){
+  const a=rand(seed*31+i)*Math.PI*2,rad=Math.sqrt(rand(seed*71+i+9))*27;
+  const lx=Math.cos(a)*rad,ly=Math.sin(a)*rad-18;
+  c.fillStyle=i%4===0?"#a4c96a":i%3===0?"#78ad58":"#376f40";
+  c.globalAlpha=.55+rand(seed+i)*.35;c.beginPath();c.ellipse(lx,ly,2+rand(i+seed)*3,1.5+rand(i+seed+90)*2,a,0,Math.PI*2);c.fill();
+ }
+ c.globalAlpha=1;
+ // Luz suave no topo da copa
+ const glow=c.createRadialGradient(-9,-38,1,-9,-28,34);glow.addColorStop(0,"#d2e79b30");glow.addColorStop(1,"#d2e79b00");
+ c.fillStyle=glow;c.beginPath();c.arc(-9,-28,34,0,Math.PI*2);c.fill();
  c.restore();
 }
 function drawHouse(c,x,y,scale=1,kind=0){
