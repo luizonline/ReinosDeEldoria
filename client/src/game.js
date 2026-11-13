@@ -157,7 +157,9 @@ function drawPixelHero(x,y,t){
  const phase=moving?t/78:t/360,bob=moving?Math.abs(Math.sin(phase))*2.4:Math.sin(phase)*.7;
  const stride=moving?Math.sin(phase)*5:0,attack=attackState>0?Math.sin((1-attackState)*Math.PI):0;
  const skin="#d6a982",metal="#aebdc5",dark="#18232b";
- ctx.save();ctx.translate(Math.round(x),Math.round(y+bob));if(direction==="left")ctx.scale(-1,1);
+ ctx.save();ctx.translate(Math.round(x),Math.round(y+bob));if(direction==="left")ctx.scale(-1,1);ctx.scale(1.24,1.24);
+ // Refinamento de silhueta: luz de recorte, placas sobrepostas e detalhes de metal
+ ctx.save();ctx.globalCompositeOperation="screen";const rim=ctx.createRadialGradient(-7,-39,1,0,-28,36);rim.addColorStop(0,"#fff3cf30");rim.addColorStop(1,"#fff3cf00");ctx.fillStyle=rim;ctx.beginPath();ctx.ellipse(0,-25,19,34,0,0,Math.PI*2);ctx.fill();ctx.restore();
  // sombra e pernas articuladas
  ctx.fillStyle="#101b1b88";ctx.beginPath();ctx.ellipse(0,13,17,6,0,0,Math.PI*2);ctx.fill();
  ctx.fillStyle="#342e2a";ctx.beginPath();ctx.moveTo(-9,-5);ctx.lineTo(-10+stride,-1);ctx.lineTo(-11+stride,10);ctx.lineTo(-3+stride,11);ctx.lineTo(0,1);ctx.lineTo(4-stride,11);ctx.lineTo(12-stride,10);ctx.lineTo(9,-5);ctx.closePath();ctx.fill();
@@ -173,6 +175,15 @@ function drawPixelHero(x,y,t){
  ctx.fillStyle=armor;ctx.beginPath();ctx.moveTo(-9,-27);ctx.lineTo(9,-27);ctx.lineTo(11,-8);ctx.lineTo(0,-4);ctx.lineTo(-11,-8);ctx.closePath();ctx.fill();
  ctx.strokeStyle="#27343a";ctx.lineWidth=1.5;ctx.beginPath();ctx.moveTo(0,-25);ctx.lineTo(0,-8);ctx.stroke();
  ctx.fillStyle="#d8b66e";ctx.fillRect(-7,-10,14,3);ctx.fillRect(-2,-18,4,7);
+ // Placa central em relevo, rebites e filetes de luz
+ const plate=ctx.createLinearGradient(-7,-25,7,-8);plate.addColorStop(0,"#f0e6c8");plate.addColorStop(.35,"#b8c7c8");plate.addColorStop(1,"#657d88");
+ ctx.fillStyle=plate;ctx.beginPath();ctx.moveTo(-5,-24);ctx.lineTo(5,-24);ctx.lineTo(6,-11);ctx.lineTo(0,-7);ctx.lineTo(-6,-11);ctx.closePath();ctx.fill();
+ ctx.strokeStyle="#f2d18a";ctx.lineWidth=.8;ctx.stroke();
+ ctx.fillStyle="#f6dda0";for(const px of [-8,8]){ctx.beginPath();ctx.arc(px,-21,1.2,0,Math.PI*2);ctx.fill();}
+ ctx.strokeStyle="#ffffff88";ctx.lineWidth=1;ctx.beginPath();ctx.moveTo(-7,-25);ctx.lineTo(-4,-27);ctx.moveTo(7,-25);ctx.lineTo(4,-27);ctx.stroke();
+ // Cinto, fivela e bolsas laterais
+ ctx.fillStyle="#4a3024";ctx.fillRect(-9,-7,18,3);ctx.fillStyle="#e4c078";ctx.fillRect(-2,-8,5,5);ctx.fillStyle="#5a4732";ctx.fillRect(-1,-7,3,3);
+ ctx.fillStyle="#5a4030";ctx.fillRect(-12,-5,4,6);ctx.fillRect(8,-5,4,6);
  ctx.fillStyle=metal;ctx.beginPath();ctx.ellipse(-11,-24,5,5,-.4,0,Math.PI*2);ctx.ellipse(11,-24,5,5,.4,0,Math.PI*2);ctx.fill();
  // braços e luvas
  ctx.strokeStyle=dark;ctx.lineWidth=7;ctx.lineCap="round";ctx.beginPath();ctx.moveTo(-11,-23);ctx.lineTo(-15,-12);ctx.moveTo(11,-23);ctx.lineTo(15+attack*5,-13-attack*5);ctx.stroke();
@@ -197,6 +208,7 @@ function drawPixelHero(x,y,t){
   ctx.strokeStyle="#d8c9a6";ctx.lineWidth=d.weapon==="lance"?3:2.5;ctx.beginPath();ctx.moveTo(1,-10);ctx.lineTo(d.weapon==="lance"?4:-1,-40);ctx.stroke();
   ctx.strokeStyle="#f5e9ca";ctx.lineWidth=1;ctx.beginPath();ctx.moveTo(2,-14);ctx.lineTo(1,-36);ctx.stroke();
   ctx.strokeStyle="#c69c58";ctx.lineWidth=3;ctx.beginPath();ctx.moveTo(-4,-10);ctx.lineTo(5,-10);ctx.stroke();
+  ctx.save();ctx.globalCompositeOperation="screen";ctx.strokeStyle="#fff0c4";ctx.shadowColor="#f6d58b";ctx.shadowBlur=8;ctx.lineWidth=.8;ctx.beginPath();ctx.moveTo(1,-13);ctx.lineTo(0,-36);ctx.stroke();ctx.restore();
  }else if(d.weapon==="staff"){
   ctx.strokeStyle="#6c4b36";ctx.lineWidth=4;ctx.beginPath();ctx.moveTo(0,2);ctx.lineTo(0,-42);ctx.stroke();
   const orb=chosenClass==="priest"?"#fff0a6":"#b89aff";ctx.fillStyle=orb;ctx.shadowColor=orb;ctx.shadowBlur=attackState>0?22:9;ctx.beginPath();ctx.arc(0,-45,5+attack*.8,0,Math.PI*2);ctx.fill();ctx.shadowBlur=0;
