@@ -1,0 +1,52 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="128" height="144" viewBox="0 0 128 144" shape-rendering="crispEdges">
+<defs>
+ <linearGradient id="robe" x2="1" y2="1"><stop stop-color="#8e42d7"/><stop offset=".48" stop-color="#55218d"/><stop offset="1" stop-color="#241044"/></linearGradient>
+ <linearGradient id="gold" x2="0" y2="1"><stop stop-color="#fff0a8"/><stop offset=".45" stop-color="#dca83e"/><stop offset="1" stop-color="#80501b"/></linearGradient>
+ <linearGradient id="skin" x2="0" y2="1"><stop stop-color="#ffe0b4"/><stop offset="1" stop-color="#b8784d"/></linearGradient>
+ <radialGradient id="orb"><stop stop-color="#fff"/><stop offset=".3" stop-color="#e7c8ff"/><stop offset=".7" stop-color="#a33dff"/><stop offset="1" stop-color="#5b1ab0"/></radialGradient>
+ <filter id="glow"><feGaussianBlur stdDeviation="4" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+</defs>
+<ellipse cx="63" cy="132" rx="35" ry="8" fill="#07100d" opacity=".55"/>
+<!-- staff -->
+<path d="M96 49 L91 128" stroke="#382014" stroke-width="8" stroke-linecap="round"/><path d="M96 50 L91 127" stroke="#b77b3d" stroke-width="3"/>
+<path d="M88 44 Q78 27 93 17 Q108 6 114 23 Q122 40 103 48" fill="none" stroke="#e8bd67" stroke-width="5"/>
+<circle cx="101" cy="29" r="15" fill="#7c27ce" opacity=".35" filter="url(#glow)"/><circle cx="101" cy="29" r="10" fill="url(#orb)" stroke="#f2d2ff" stroke-width="2"/><path d="M101 20 L104 27 L111 29 L104 32 L101 39 L98 32 L91 29 L98 26Z" fill="#fff" opacity=".9"/>
+<!-- boots -->
+<path d="M39 113 L58 113 L58 131 L49 137 L29 135 L28 128Z" fill="#342039" stroke="#171021" stroke-width="4"/><path d="M67 112 L85 112 L88 129 L81 137 L62 134 L60 127Z" fill="#342039" stroke="#171021" stroke-width="4"/>
+<path d="M31 128 L56 128 L54 135 L29 136Z M64 128 L87 128 L87 136 L63 135Z" fill="#d7a84a" stroke="#71451c" stroke-width="2"/>
+<!-- robe silhouette -->
+<path d="M39 55 L79 55 L91 112 L80 126 L25 126 L18 112Z" fill="#211333" stroke="#120d1e" stroke-width="5"/>
+<path d="M42 54 L76 54 L83 110 L74 121 L31 121 L25 109Z" fill="url(#robe)" stroke="#c28a35" stroke-width="3"/>
+<path d="M43 62 L63 72 L81 62 L77 113 L63 120 L36 112Z" fill="#6e2aaa" opacity=".9"/>
+<path d="M61 70 L65 70 L68 116 L61 116Z" fill="url(#gold)"/>
+<path d="M52 94 L64 86 L76 94 L72 106 L64 112 L55 105Z" fill="#32154f" stroke="url(#gold)" stroke-width="3"/>
+<path d="M64 91 L67 98 L74 100 L67 103 L64 110 L61 103 L54 100 L61 97Z" fill="#ffe29a"/>
+<!-- sleeves -->
+<path d="M39 61 L25 67 L15 91 L25 99 L39 83Z" fill="#56228d" stroke="#1a1026" stroke-width="4"/>
+<path d="M78 61 L89 68 L88 91 L78 97 L72 81Z" fill="#7130a5" stroke="#1a1026" stroke-width="4"/>
+<path d="M17 88 L27 92 L25 101 L15 97Z M79 88 L89 85 L94 93 L84 100Z" fill="url(#gold)"/>
+<!-- hands -->
+<path d="M14 96 Q18 89 26 93 L31 102 L24 109 L15 105Z" fill="url(#skin)" stroke="#5b3427" stroke-width="2"/>
+<path d="M82 96 Q88 91 94 96 L96 105 L87 110 L80 103Z" fill="url(#skin)" stroke="#5b3427" stroke-width="2"/>
+<!-- neck and beard -->
+<path d="M49 45 L76 45 L75 62 L50 62Z" fill="url(#skin)"/>
+<path d="M42 28 Q44 9 66 9 Q88 11 88 34 L82 53 L73 63 L54 61 L43 49Z" fill="#e9c69d" stroke="#21162b" stroke-width="4"/>
+<path d="M45 39 Q53 44 61 40 Q72 45 84 37 L82 54 L73 68 L62 75 L49 64 L42 52Z" fill="#eee6d8" stroke="#a69a8d" stroke-width="3"/>
+<path d="M49 48 L57 53 L53 61 L62 58 L67 68 L73 57 L79 61 L81 48 L73 44 L64 48 L56 44Z" fill="#fff8e8"/>
+<!-- face -->
+<path d="M49 27 Q63 17 79 27 L80 45 L70 55 L55 51 L47 42Z" fill="url(#skin)" stroke="#563329" stroke-width="3"/>
+<path d="M49 35 L59 34 L58 39 L50 40Z M68 34 L78 34 L77 40 L69 39Z" fill="#fff1dc"/>
+<path d="M52 36 L58 36 L58 40 L52 40Z M70 36 L76 36 L76 40 L70 40Z" fill="#342039"/>
+<path d="M61 42 L66 42 L64 48Z" fill="#a85e43"/>
+<path d="M56 50 Q64 54 73 49" fill="none" stroke="#fff4e8" stroke-width="3"/>
+<!-- hat brim and crown -->
+<path d="M21 30 Q40 19 64 22 Q89 18 105 32 Q91 41 64 39 Q36 42 21 30Z" fill="#2a1246" stroke="#120b20" stroke-width="5"/>
+<path d="M34 28 Q29 10 46 4 Q68 -3 82 11 Q90 20 86 31 Q64 36 34 28Z" fill="url(#robe)" stroke="#170d27" stroke-width="4"/>
+<path d="M39 23 Q43 9 61 7 Q77 6 83 17" fill="none" stroke="#a95ce0" stroke-width="4"/>
+<path d="M24 29 Q62 39 101 30" fill="none" stroke="url(#gold)" stroke-width="6"/>
+<path d="M54 28 L64 24 L74 29 L64 35Z" fill="url(#gold)"/><circle cx="64" cy="29" r="4" fill="#f8e6a6"/>
+<path d="M47 9 Q58 1 70 6" fill="none" stroke="#dca9ff" stroke-width="2" opacity=".8"/>
+<!-- trim and sparkle -->
+<path d="M31 111 L39 117 M79 116 L84 108" stroke="#f3d17d" stroke-width="3"/>
+<path d="M9 45 L13 45 M11 43 L11 47 M110 65 L115 65 M112 62 L112 68" stroke="#e8c5ff" stroke-width="2"/>
+</svg>
